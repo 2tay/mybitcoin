@@ -2,25 +2,25 @@ package com.example;
 
 public class TransactionOutput {
     private int value;
-    private String pubKeyHash;
+    private String pubKey;
 
-    public TransactionOutput(int value, String pubKeyHash) {
+    public TransactionOutput(int value, String pubKey) {
         this.value = value;
-        this.pubKeyHash = pubKeyHash;
+        this.pubKey = pubKey;
     }
 
     public int getValue() {
         return value;
     }
 
-    public String getpubKeyHash() {
-        return pubKeyHash;
+    public String getpubKey() {
+        return pubKey;
     }
 
     public String toString() {
         return "TransactionOutput{" +
                 "value=" + value +
-                ", pubKeyHash='" + pubKeyHash + '\'' +
+                ", pubKey='" + pubKey + '\'' +
                 '}';
     }
 }
