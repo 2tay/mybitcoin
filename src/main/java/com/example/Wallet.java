@@ -23,11 +23,21 @@ public class Wallet {
         return publicKey;
     }
 
-    private boolean sendMoney(PublicKey recipient) {
-        //to do 
-        return false;
+    public String encryptDataWithPubKey(String data, PublicKey recipientPublicKey) {
+        return KeyUtils.encryptWithPubKey(data, recipientPublicKey);
     }
 
+    public String decryptDataWithPrivateKey(String encryptedData) {
+        return KeyUtils.decryptWithPrivateKey(encryptedData, privateKey);
+    }
+
+    public String signData(String data) {
+        return KeyUtils.signData(data, privateKey);
+    }
+
+    public boolean verifySignature(String data, String signedData, PublicKey senderPublicKey) {
+        return KeyUtils.verifySignature(data, signedData, senderPublicKey);
+    }
 
     public static void main(String[] args) {
         Wallet w1 = new Wallet();

@@ -30,14 +30,14 @@ public class Transaction {
         // serialize transaction data 
     }
 
-    public String setTxSignature(PrivateKey privateKey) {
-        signature = KeyUtils.crypting(txData, privateKey);
+    /*public String setTxSignature(PrivateKey privateKey) {
+        signature = KeyUtils.encrypt(txData, privateKey);
         return signature;
-    }
+    }*/
 
-    public boolean verifyTransaction(PublicKey publicKey) {
-        return KeyUtils.decrypting(txData, publicKey) == txData;
-    }
+    /*public boolean verifyTransaction(PublicKey publicKey) {
+        return KeyUtils.decrypt(txData, publicKey) == txData;
+    }*/
 
     public String toString() {
         return "Transaction{" +
