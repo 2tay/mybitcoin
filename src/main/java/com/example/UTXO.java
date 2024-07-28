@@ -62,9 +62,13 @@ public class UTXO {
                 '}';
     }
 
-    public static void main(String[] args) {
+    public static void test1() {
         Wallet w1 = new Wallet();
         UTXO utxo1 = new UTXO("txid0", 0, 6, w1.getPublicKey());
         System.out.println(utxo1);
+    }
+
+    public static void main(String[] args) {
+        UTXO.test1();
     }
 }

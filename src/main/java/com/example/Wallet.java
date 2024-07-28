@@ -39,9 +39,13 @@ public class Wallet {
         return KeyUtils.verifySignature(data, signedData, senderPublicKey);
     }
 
-    public static void main(String[] args) {
+    public static void test1() {
         Wallet w1 = new Wallet();
         System.out.println("Private Key: " + w1.getPrivateKey());
         System.out.println("Public Key: " + w1.getPublicKey());
+    }
+
+    public static void main(String[] args) {
+        Wallet.test1();
     }
 }

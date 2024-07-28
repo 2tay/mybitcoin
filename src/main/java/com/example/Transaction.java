@@ -38,4 +38,12 @@ public class Transaction {
                 '}';
     }
 
+    public static void test1() {
+        //test to do
+    }
+
+    public static void main(String[] args) {
+        
+    }
+
 }

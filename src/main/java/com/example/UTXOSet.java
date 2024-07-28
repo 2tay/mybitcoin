@@ -41,7 +41,7 @@ public class UTXOSet {
         return new ArrayList<>(utxoMap.values());
     }
 
-    public static void main(String[] args) {
+    public static void test1() {
         Wallet w1 = new Wallet();
         Wallet w2 = new Wallet();
         UTXO utxo1 = new UTXO("txId0", 0, 6, w1.getPublicKey());
@@ -62,6 +62,10 @@ public class UTXOSet {
         for(UTXO utxo : utxoPool.findUTXOs(w2.getPublicKey())) {
             System.out.println(utxo);
         }
+    }
+
+    public static void main(String[] args) {
+        UTXOSet.test1();
     }
 }
 
