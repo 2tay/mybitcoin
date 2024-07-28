@@ -7,26 +7,26 @@ import java.util.List;
 import java.util.Map;
 
 public class UTXOSet {
-    private Map<String, UTXO> utxoMap;
+    private static Map<String, UTXO> utxoMap = new HashMap<>();
 
-    public UTXOSet() {
-        this.utxoMap = new HashMap<>();
+    public static Map<String, UTXO> getUtxoMap() {
+        return utxoMap;
     }
 
     // Add a new UTXO
-    public void addUTXO(UTXO utxo) {
+    public static void addUTXO(UTXO utxo) {
         String key = utxo.getTransactionId() + ":" + utxo.getIndex();
         utxoMap.put(key, utxo);
     }
 
     // Remove a spent UTXO
-    public void removeUTXO(String transactionId, int index) {
+    public static void removeUTXO(String transactionId, int index) {
         String key = transactionId + ":" + index;
         utxoMap.remove(key);
     }
 
     // Find UTXOs for a given public key hash
-    public List<UTXO> findUTXOs(PublicKey pubKey) {
+    public static List<UTXO> findUTXOs(PublicKey pubKey) {
         List<UTXO> result = new ArrayList<>();
         for (UTXO utxo : utxoMap.values()) {
             if (utxo.getpublicKey().equals(pubKey)) {
@@ -37,7 +37,7 @@ public class UTXOSet {
     }
 
     // Get all UTXOs
-    public List<UTXO> getAllUTXOs() {
+    public static List<UTXO> getAllUTXOs() {
         return new ArrayList<>(utxoMap.values());
     }
 
@@ -47,19 +47,18 @@ public class UTXOSet {
         UTXO utxo1 = new UTXO("txId0", 0, 6, w1.getPublicKey());
         UTXO utxo2 =new UTXO("txid0", 1, 4, w1.getPublicKey());
         UTXO utxo3 = new UTXO("txid0", 3, 10, w2.getPublicKey());
-        UTXOSet utxoPool = new UTXOSet();
 
-        utxoPool.addUTXO(utxo1);
-        utxoPool.addUTXO(utxo2);
-        utxoPool.addUTXO(utxo3);
+        UTXOSet.addUTXO(utxo1);
+        UTXOSet.addUTXO(utxo2);
+        UTXOSet.addUTXO(utxo3);
 
         System.out.println("All Utxos:");
-        for(UTXO utxo: utxoPool.getAllUTXOs()) {
+        for(UTXO utxo: UTXOSet.getAllUTXOs()) {
             System.out.println(utxo);
         }
 
         System.out.println("w2 Utxos:");
-        for(UTXO utxo : utxoPool.findUTXOs(w2.getPublicKey())) {
+        for(UTXO utxo : UTXOSet.findUTXOs(w2.getPublicKey())) {
             System.out.println(utxo);
         }
     }
