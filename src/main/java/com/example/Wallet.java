@@ -4,6 +4,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.KeyPair;
 import com.example.utils.KeyUtils;
+import com.example.utils.TransactionUtils;
 
 public class Wallet {
     private PrivateKey privateKey;
@@ -32,11 +33,7 @@ public class Wallet {
     }
 
     public String signData(String data) {
-        return KeyUtils.signData(data, privateKey);
-    }
-
-    public boolean verifySignature(String data, String signedData, PublicKey senderPublicKey) {
-        return KeyUtils.verifySignature(data, signedData, senderPublicKey);
+        return TransactionUtils.signData(data, privateKey);
     }
 
     public static void test1() {

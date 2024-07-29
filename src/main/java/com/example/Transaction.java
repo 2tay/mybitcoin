@@ -1,5 +1,6 @@
 package com.example;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +8,25 @@ import java.util.List;
 public class Transaction {
     private List<TransactionInput> inputs;
     private List<TransactionOutput> outputs;
+    private PublicKey publicKey;
     private String signature;
 
-    public Transaction() {
+    public Transaction(PublicKey publicKey) {
+        this.publicKey = publicKey;
         this.inputs = new ArrayList<>();
         this.outputs = new ArrayList<>();
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public List<TransactionInput> getInputs() {
+        return inputs;
+    }
+
+    public List<TransactionOutput> getOutputs() {
+        return outputs;
     }
 
     public String getSignature() {
@@ -34,7 +49,6 @@ public class Transaction {
         return "Transaction{" +
                 "inputs=" + inputs +
                 ", outputs=" + outputs +
-                ", signature=" + signature +
                 '}';
     }
 

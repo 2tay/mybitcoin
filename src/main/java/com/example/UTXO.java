@@ -1,6 +1,7 @@
 package com.example;
 
 import java.security.PublicKey;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,6 +18,13 @@ public class UTXO {
         this.index = index;
         this.value = value;
         this.publicKey = publicKey;
+    }
+
+    public static Wallet genesisUtxo() {
+        Wallet h2tayWallet = new Wallet();
+        UTXO firstUtxo = new UTXO("txid0", 0, 200, h2tayWallet.getPublicKey());
+        UTXOSet.addUTXO(firstUtxo);
+        return h2tayWallet;
     }
 
     public String getUtxoId() {
@@ -68,7 +76,18 @@ public class UTXO {
         System.out.println(utxo1);
     }
 
+    // test genisis utxo 
+    public static void test2() {
+        UTXO.genesisUtxo();
+        List<UTXO> utxos = UTXOSet.getAllUTXOs();
+        System.out.println("Genisis UTXO:");
+        for(UTXO utxo: utxos) {
+            System.out.println(utxo);
+        }
+    }
+
     public static void main(String[] args) {
         UTXO.test1();
+        UTXO.test2();
     }
 }
