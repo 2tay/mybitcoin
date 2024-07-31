@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.Transaction.Transaction;
 import com.example.utils.TransactionUtils;
 
-public class Network {
+public class TransactionPool {
     private static List<Transaction> mempool = new ArrayList<>();
 
     public static boolean AddToPool(Transaction tx) {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import com.example.Pool.Network;
+import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
 import com.example.Transaction.TransactionInput;
@@ -106,8 +106,8 @@ public class TransactionUtils {
     }
 
     //propagate transaction to network
-    public static boolean PropagateTransaction(Transaction transaction) {
-        return Network.AddToPool(transaction);
+    public static boolean propagateTransaction(Transaction transaction) {
+        return TransactionPool.AddToPool(transaction);
     }
 
     //tets1: test sign data and verfiy signature test function 
@@ -146,9 +146,9 @@ public class TransactionUtils {
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
             System.out.println("Transaction created: " + t1);
-            boolean isValid = PropagateTransaction(t1);
+            boolean isValid = propagateTransaction(t1);
             System.out.println("Added to network validity: " + isValid);
-            List<Transaction> mempool = Network.getMemPool();
+            List<Transaction> mempool = TransactionPool.getMemPool();
             for(Transaction tx: mempool) {
                 System.out.println("Transaction in mempool: " + tx.getPublicKey());
             }
