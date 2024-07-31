@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import com.example.Network;
 import com.example.Transaction;
 import com.example.TransactionInput;
 import com.example.TransactionOutput;
@@ -104,7 +105,12 @@ public class TransactionUtils {
         return transaction;
     }
 
-    //sign data and verfiy signature test function 
+    //propagate transaction to network
+    public static boolean PropagateTransaction(Transaction transaction) {
+        return Network.AddToPool(transaction);
+    }
+
+    //tets1: test sign data and verfiy signature test function 
     public static void test1() {
         Wallet myWallet = new Wallet();
         String data = "hakim2tay";
@@ -114,7 +120,7 @@ public class TransactionUtils {
         System.out.println("is valid: " + isValid);
     }
 
-    //test1: test createTransaction function
+    //test2: test createTransaction function
     public static void test2() {
         Wallet h2tayWallet = UTXO.genesisUtxo();
         Wallet recipient = new Wallet();
@@ -132,8 +138,26 @@ public class TransactionUtils {
             e.printStackTrace();
         }
     }
+
+    //test3: test propagate to network
+    public static void test3() {
+        Wallet h2tayWallet = UTXO.genesisUtxo();
+        Wallet recipient = new Wallet();
+        try {
+            Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+            System.out.println("Transaction created: " + t1);
+            boolean isValid = PropagateTransaction(t1);
+            System.out.println("Added to network validity: " + isValid);
+            List<Transaction> mempool = Network.getMemPool();
+            for(Transaction tx: mempool) {
+                System.out.println("Transaction in mempool: " + tx.getPublicKey());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     public static void main(String[] args) {
-        test2();
+        test3();
     }
 }
