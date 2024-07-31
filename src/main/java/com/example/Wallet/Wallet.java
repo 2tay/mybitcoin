@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Wallet;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;

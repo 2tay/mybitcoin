@@ -1,8 +1,9 @@
-package com.example;
+package com.example.Pool;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.Transaction.Transaction;
 import com.example.utils.TransactionUtils;
 
 public class Network {

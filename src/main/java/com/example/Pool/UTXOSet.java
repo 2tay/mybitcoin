@@ -1,10 +1,13 @@
-package com.example;
+package com.example.Pool;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.example.Transaction.UTXO;
+import com.example.Wallet.Wallet;
 
 public class UTXOSet {
     private static Map<String, UTXO> utxoMap = new HashMap<>();

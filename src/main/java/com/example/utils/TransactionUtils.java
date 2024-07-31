@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import com.example.Network;
-import com.example.Transaction;
-import com.example.TransactionInput;
-import com.example.TransactionOutput;
-import com.example.UTXO;
-import com.example.UTXOSet;
-import com.example.Wallet;
+import com.example.Pool.Network;
+import com.example.Pool.UTXOSet;
+import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionInput;
+import com.example.Transaction.TransactionOutput;
+import com.example.Transaction.UTXO;
+import com.example.Wallet.Wallet;
 
 public class TransactionUtils {
 

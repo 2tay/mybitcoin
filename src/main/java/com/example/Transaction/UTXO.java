@@ -1,9 +1,12 @@
-package com.example;
+package com.example.Transaction;
 
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.example.Pool.UTXOSet;
+import com.example.Wallet.Wallet;
 
 public class UTXO {
     private String utxoId;
