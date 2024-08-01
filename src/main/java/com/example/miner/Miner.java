@@ -23,9 +23,14 @@ public class Miner extends Thread {
     public void run() {
         // Get a transaction from the pool
         Transaction tx = getTransactionFromPool();
-        if (tx == null) {
-            OutputWriter.writeOutput(minerName + " found no transactions to mine.");
-            return;
+        while(tx == null) {
+            OutputWriter.writeOutput(minerName + " found no transactions to mine yet.");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tx = getTransactionFromPool();
         }
 
         // Try to mine the transaction (simplified puzzle)
