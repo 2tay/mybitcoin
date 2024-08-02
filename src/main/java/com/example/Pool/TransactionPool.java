@@ -10,8 +10,15 @@ public class TransactionPool {
     private static List<Transaction> mempool = new ArrayList<>();
 
     public static boolean AddToPool(Transaction tx) {
-        boolean isValid = TransactionUtils.verifySignature(tx.toString(), tx.getSignature(), tx.getPublicKey());
+        boolean isValid = TransactionUtils.verifyTransaction(tx);
         if(isValid) {
+            // Add the new Utxos to UtxoSet
+            UTXOSet.addUtxosTransaction(tx);
+
+            // Update UTXOs
+            UTXOSet.removeConsumedUtxosTransaction(tx);
+
+            // Add transaction to transactionPool
             mempool.add(tx);
         }
         return isValid;

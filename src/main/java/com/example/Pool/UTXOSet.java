@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionInput;
+import com.example.Transaction.TransactionOutput;
 import com.example.Transaction.UTXO;
 import com.example.Wallet.Wallet;
 
@@ -20,6 +23,30 @@ public class UTXOSet {
     public static void addUTXO(UTXO utxo) {
         String key = utxo.getTransactionId() + ":" + utxo.getIndex();
         utxoMap.put(key, utxo);
+    }
+
+    public static void addUtxosTransaction(Transaction transaction) {
+        int index = 0;
+        for(TransactionOutput output : transaction.getOutputs()) {
+            UTXOSet.addUTXO(new UTXO(transaction.getSignature(), index, output.getValue(), output.getpubKey()));
+            index++;
+        }
+    }
+
+    public static void removeConsumedUtxosTransaction(Transaction transaction) {
+        List<UTXO> availableUTXOs = UTXOSet.findUTXOs(transaction.getPublicKey());
+        for (TransactionInput input : transaction.getInputs()) {
+            UTXO spentUTXO = null;
+            for (UTXO utxo : availableUTXOs) {
+                if (utxo.getTransactionId().equals(input.getPrevTxId()) && utxo.getIndex() == input.getOutputIndex()) {
+                    spentUTXO = utxo;
+                    break;
+                }
+            }
+            if (spentUTXO != null) {
+                UTXOSet.removeUTXO(spentUTXO.getTransactionId(), spentUTXO.getIndex());
+            }
+        }
     }
 
     // Remove a spent UTXO

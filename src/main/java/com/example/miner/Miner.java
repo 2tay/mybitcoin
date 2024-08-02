@@ -70,10 +70,7 @@ public class Miner extends Thread {
 
     private boolean mineTransaction() {
         int nonce = new Random().nextInt(DIFFICULTY + 1);
-        if(nonce == DIFFICULTY) {
-            return true;
-        }
-        return false;
+        return nonce == DIFFICULTY;
     }
 
 

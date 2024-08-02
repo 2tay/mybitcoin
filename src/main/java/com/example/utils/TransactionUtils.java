@@ -41,6 +41,43 @@ public class TransactionUtils {
         }
     }
 
+    public static boolean verifyTransaction(Transaction transaction) {
+        //verify signature
+        boolean validSignature = verifySignature(transaction.toString(), transaction.getSignature(), transaction.getPublicKey());
+        if(!validSignature) {
+            System.out.println("Invalid signature");
+            return false;
+        }
+
+        //verify inputs validity
+        for(TransactionInput input : transaction.getInputs()) {
+            if(!verifyInput(transaction.getPublicKey(), input)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean verifyInput(PublicKey publicKey, TransactionInput input) {
+        //verfiy transaction publickey suit the input public key
+        if(publicKey != input.getSenderPublicKey()) {
+            System.out.println("Transaction publicKey doesnt match input");
+            return false;
+        }
+
+        //check if the there is any utxos suits the input
+        List<UTXO> senderUtxos = UTXOSet.findUTXOs(publicKey);
+        for(UTXO utxo : senderUtxos) {
+            if(utxo.getTransactionId().equals(input.getPrevTxId()) && utxo.getIndex() == input.getOutputIndex()) {
+                System.out.println("utxo input exist");
+                return true;
+            }
+        }
+        //if none fo the utxos suit the input
+        System.out.println("utxo input doesnt exist");
+        return false;
+    }
+
     //transaction creation
     public static Transaction createTransaction(Wallet senderWallet, PublicKey recipient, int amount) throws Exception {
         List<UTXO> availableUTXOs = UTXOSet.findUTXOs(senderWallet.getPublicKey());
@@ -81,29 +118,15 @@ public class TransactionUtils {
         transaction.setSignature(signature);
 
         //add the new Utxos to UtxoSet
-        int index = 0;
-        for(TransactionOutput output : transaction.getOutputs()) {
-            
-            UTXOSet.addUTXO(new UTXO(transaction.getSignature(), index, output.getValue(), output.getpubKey()));
-            index++;
-        }
+        //UTXOSet.addUtxosTransaction(transaction);
 
         // Update UTXOs
-        for (TransactionInput input : inputs) {
-            UTXO spentUTXO = null;
-            for (UTXO utxo : availableUTXOs) {
-                if (utxo.getTransactionId().equals(input.getPrevTxId()) && utxo.getIndex() == input.getOutputIndex()) {
-                    spentUTXO = utxo;
-                    break;
-                }
-            }
-            if (spentUTXO != null) {
-                UTXOSet.removeUTXO(spentUTXO.getTransactionId(), spentUTXO.getIndex());
-            }
-        }
+        //UTXOSet.removeConsumedUtxosTransaction(transaction);
 
         return transaction;
     }
+
+
 
     //propagate transaction to network
     public static boolean propagateTransaction(Transaction transaction) {
@@ -155,6 +178,22 @@ public class TransactionUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //test4: test verifyTransaction
+    public static void test4() {
+        Wallet h2tayWallet = UTXO.genesisUtxo();
+        Wallet recipient = new Wallet();
+            Transaction t1;
+            try {
+                t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+                System.out.println("Transaction created: " + t1);
+                boolean isValid = verifyTransaction(t1);
+                System.err.println("transaction isValid: " + isValid);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
     }
     
     public static void main(String[] args) {
