@@ -1,6 +1,7 @@
 package com.example.Pool;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.example.Transaction.Transaction;
@@ -12,12 +13,6 @@ public class TransactionPool {
     public static boolean AddToPool(Transaction tx) {
         boolean isValid = TransactionUtils.verifyTransaction(tx);
         if(isValid) {
-            // Add the new Utxos to UtxoSet
-            //UTXOSet.addUtxosTransaction(tx);
-
-            // Update UTXOs
-            //UTXOSet.removeConsumedUtxosTransaction(tx);
-
             // Add transaction to transactionPool
             mempool.add(tx);
         }
@@ -26,5 +21,17 @@ public class TransactionPool {
 
     public static List<Transaction> getMemPool() {
         return mempool;
+    }
+
+    public static boolean removeTransaction(Transaction tx) {
+        Iterator<Transaction> iterator = mempool.iterator();
+        while (iterator.hasNext()) {
+            Transaction currentTx = iterator.next();
+            if (currentTx.equals(tx)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
     }
 }
