@@ -1,6 +1,6 @@
 package com.example.miner;
 
-import com.Block.Block;
+import com.example.Block.Block;
 import com.example.Pool.TransactionPool;
 import com.example.Transaction.Transaction;
 import com.example.Transaction.UTXO;
