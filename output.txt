@@ -1,0 +1,745 @@
+Transaction created: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+Added to network validity: true
+Transaction in mempool: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+
+Miner1 trying to solve puzzle: MEUCIQDoN1al7tX+1um9RmfpQWLIW7CB98P6+OvsZ6EWah46hwIgWu0pp+eApIOaz8+CHxKvTpldTun5m+3pT9mUTutCpr0=
+Miner1 failed to solve puzzle in attempt: 1
+Miner2 trying to solve puzzle: MEUCIQDoN1al7tX+1um9RmfpQWLIW7CB98P6+OvsZ6EWah46hwIgWu0pp+eApIOaz8+CHxKvTpldTun5m+3pT9mUTutCpr0=
+Miner2 failed to solve puzzle in attempt: 1
+Miner3 trying to solve puzzle: MEUCIQDoN1al7tX+1um9RmfpQWLIW7CB98P6+OvsZ6EWah46hwIgWu0pp+eApIOaz8+CHxKvTpldTun5m+3pT9mUTutCpr0=
+Miner3 failed to solve puzzle in attempt: 1
+miner4 trying to solve puzzle: MEUCIQDoN1al7tX+1um9RmfpQWLIW7CB98P6+OvsZ6EWah46hwIgWu0pp+eApIOaz8+CHxKvTpldTun5m+3pT9mUTutCpr0=
+miner5 trying to solve puzzle: MEUCIQDoN1al7tX+1um9RmfpQWLIW7CB98P6+OvsZ6EWah46hwIgWu0pp+eApIOaz8+CHxKvTpldTun5m+3pT9mUTutCpr0=
+miner5 failed to solve puzzle in attempt: 1
+miner4 failed to solve puzzle in attempt: 1
+Miner3 failed to solve puzzle in attempt: 2
+miner4 failed to solve puzzle in attempt: 2
+Miner3 failed to solve puzzle in attempt: 3
+miner5 failed to solve puzzle in attempt: 2
+Miner1 failed to solve puzzle in attempt: 2
+Miner2 failed to solve puzzle in attempt: 2
+Miner3 failed to solve puzzle in attempt: 4
+miner4 failed to solve puzzle in attempt: 3
+Miner2 successfully Solve puzzle in attempt: 3
+Miner2is mining transaction: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+Miner2 IS OUT!
+miner5 failed to solve puzzle in attempt: 3
+miner4 failed to solve puzzle in attempt: 4
+Miner3 failed to solve puzzle in attempt: 5
+miner4 failed to solve puzzle in attempt: 5
+miner4 failed to solve puzzle in attempt: 6
+Miner1 failed to solve puzzle in attempt: 3
+miner5 failed to solve puzzle in attempt: 4
+miner4 failed to solve puzzle in attempt: 7
+Miner3 failed to solve puzzle in attempt: 6
+Miner1 failed to solve puzzle in attempt: 4
+miner5 failed to solve puzzle in attempt: 5
+miner4 failed to solve puzzle in attempt: 8
+Miner3 failed to solve puzzle in attempt: 7
+miner5 failed to solve puzzle in attempt: 6
+Miner3 failed to solve puzzle in attempt: 8
+miner4 failed to solve puzzle in attempt: 9
+Miner1 failed to solve puzzle in attempt: 5
+Miner3 failed to solve puzzle in attempt: 9
+Miner1 failed to solve puzzle in attempt: 6
+Miner1 failed to solve puzzle in attempt: 7
+miner4 failed to solve puzzle in attempt: 10
+miner5 failed to solve puzzle in attempt: 7
+Miner3 failed to solve puzzle in attempt: 10
+miner5 failed to solve puzzle in attempt: 8
+Miner1 failed to solve puzzle in attempt: 8
+Miner3 failed to solve puzzle in attempt: 11
+miner4 failed to solve puzzle in attempt: 11
+Miner1 failed to solve puzzle in attempt: 9
+Miner1 failed to solve puzzle in attempt: 10
+miner5 failed to solve puzzle in attempt: 9
+Miner1 failed to solve puzzle in attempt: 11
+Miner3 failed to solve puzzle in attempt: 12
+Miner1 failed to solve puzzle in attempt: 12
+Miner3 failed to solve puzzle in attempt: 13
+miner4 failed to solve puzzle in attempt: 12
+miner5 failed to solve puzzle in attempt: 10
+Miner1 failed to solve puzzle in attempt: 13
+Miner1 failed to solve puzzle in attempt: 14
+Miner1 failed to solve puzzle in attempt: 15
+miner4 failed to solve puzzle in attempt: 13
+Miner3 failed to solve puzzle in attempt: 14
+miner4 failed to solve puzzle in attempt: 14
+Miner1 failed to solve puzzle in attempt: 16
+miner5 failed to solve puzzle in attempt: 11
+Miner3 failed to solve puzzle in attempt: 15
+miner4 failed to solve puzzle in attempt: 15
+miner5 failed to solve puzzle in attempt: 12
+Miner1 failed to solve puzzle in attempt: 17
+Miner1 failed to solve puzzle in attempt: 18
+miner4 failed to solve puzzle in attempt: 16
+Miner3 failed to solve puzzle in attempt: 16
+Miner1 failed to solve puzzle in attempt: 19
+miner5 failed to solve puzzle in attempt: 13
+miner5 failed to solve puzzle in attempt: 14
+Miner3 failed to solve puzzle in attempt: 17
+Miner3 failed to solve puzzle in attempt: 18
+miner4 failed to solve puzzle in attempt: 17
+Miner3 failed to solve puzzle in attempt: 19
+miner5 failed to solve puzzle in attempt: 15
+Miner1 failed to solve puzzle in attempt: 20
+Miner1 failed to solve puzzle in attempt: 21
+Miner3 failed to solve puzzle in attempt: 20
+miner4 failed to solve puzzle in attempt: 18
+miner4 failed to solve puzzle in attempt: 19
+miner4 failed to solve puzzle in attempt: 20
+Miner1 failed to solve puzzle in attempt: 22
+Miner1 failed to solve puzzle in attempt: 23
+miner4 failed to solve puzzle in attempt: 21
+miner4 failed to solve puzzle in attempt: 22
+Miner1 failed to solve puzzle in attempt: 24
+miner5 failed to solve puzzle in attempt: 16
+Miner3 failed to solve puzzle in attempt: 21
+miner5 failed to solve puzzle in attempt: 17
+Miner3 failed to solve puzzle in attempt: 22
+miner4 failed to solve puzzle in attempt: 23
+miner4 failed to solve puzzle in attempt: 24
+miner5 failed to solve puzzle in attempt: 18
+miner4 failed to solve puzzle in attempt: 25
+Miner1 failed to solve puzzle in attempt: 25
+miner4 failed to solve puzzle in attempt: 26
+Miner3 failed to solve puzzle in attempt: 23
+Miner1 failed to solve puzzle in attempt: 26
+miner5 failed to solve puzzle in attempt: 19
+miner4 failed to solve puzzle in attempt: 27
+Miner3 failed to solve puzzle in attempt: 24
+miner5 failed to solve puzzle in attempt: 20
+Miner3 failed to solve puzzle in attempt: 25
+miner4 failed to solve puzzle in attempt: 28
+Miner1 failed to solve puzzle in attempt: 27
+miner4 failed to solve puzzle in attempt: 29
+miner4 failed to solve puzzle in attempt: 30
+Miner3 failed to solve puzzle in attempt: 26
+Miner1 failed to solve puzzle in attempt: 28
+miner5 failed to solve puzzle in attempt: 21
+Miner1 failed to solve puzzle in attempt: 29
+Miner3 failed to solve puzzle in attempt: 27
+miner4 failed to solve puzzle in attempt: 31
+Miner1 failed to solve puzzle in attempt: 30
+miner4 failed to solve puzzle in attempt: 32
+miner5 failed to solve puzzle in attempt: 22
+miner4 failed to solve puzzle in attempt: 33
+Miner3 failed to solve puzzle in attempt: 28
+Miner1 failed to solve puzzle in attempt: 31
+Miner1 failed to solve puzzle in attempt: 32
+miner4 failed to solve puzzle in attempt: 34
+miner5 failed to solve puzzle in attempt: 23
+miner5 failed to solve puzzle in attempt: 24
+miner5 failed to solve puzzle in attempt: 25
+Miner3 failed to solve puzzle in attempt: 29
+miner5 failed to solve puzzle in attempt: 26
+Miner3 failed to solve puzzle in attempt: 30
+miner4 failed to solve puzzle in attempt: 35
+Miner1 failed to solve puzzle in attempt: 33
+Miner1 failed to solve puzzle in attempt: 34
+Miner3 failed to solve puzzle in attempt: 31
+miner4 failed to solve puzzle in attempt: 36
+Miner1 failed to solve puzzle in attempt: 35
+Miner1 failed to solve puzzle in attempt: 36
+miner5 failed to solve puzzle in attempt: 27
+miner4 failed to solve puzzle in attempt: 37
+Miner1 failed to solve puzzle in attempt: 37
+Miner3 failed to solve puzzle in attempt: 32
+miner5 failed to solve puzzle in attempt: 28
+Miner3 failed to solve puzzle in attempt: 33
+miner4 failed to solve puzzle in attempt: 38
+miner4 failed to solve puzzle in attempt: 39
+miner5 failed to solve puzzle in attempt: 29
+Miner1 failed to solve puzzle in attempt: 38
+Miner3 failed to solve puzzle in attempt: 34
+Miner1 failed to solve puzzle in attempt: 39
+Miner3 failed to solve puzzle in attempt: 35
+miner4 failed to solve puzzle in attempt: 40
+Miner3 failed to solve puzzle in attempt: 36
+Miner3 failed to solve puzzle in attempt: 37
+miner4 failed to solve puzzle in attempt: 41
+miner5 failed to solve puzzle in attempt: 30
+Miner1 failed to solve puzzle in attempt: 40
+Miner3 failed to solve puzzle in attempt: 38
+miner5 failed to solve puzzle in attempt: 31
+miner4 failed to solve puzzle in attempt: 42
+miner4 failed to solve puzzle in attempt: 43
+Miner1 failed to solve puzzle in attempt: 41
+Miner3 failed to solve puzzle in attempt: 39
+miner5 failed to solve puzzle in attempt: 32
+miner4 failed to solve puzzle in attempt: 44
+miner5 failed to solve puzzle in attempt: 33
+miner5 failed to solve puzzle in attempt: 34
+Miner1 failed to solve puzzle in attempt: 42
+Miner3 successfully Solve puzzle in attempt: 40
+Miner3is mining transaction: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+Miner3 IS OUT!
+miner5 failed to solve puzzle in attempt: 35
+miner4 failed to solve puzzle in attempt: 45
+miner4 failed to solve puzzle in attempt: 46
+miner4 failed to solve puzzle in attempt: 47
+miner5 failed to solve puzzle in attempt: 36
+miner4 failed to solve puzzle in attempt: 48
+Miner1 failed to solve puzzle in attempt: 43
+miner5 failed to solve puzzle in attempt: 37
+miner4 failed to solve puzzle in attempt: 49
+Miner1 failed to solve puzzle in attempt: 44
+miner5 failed to solve puzzle in attempt: 38
+miner4 failed to solve puzzle in attempt: 50
+miner5 failed to solve puzzle in attempt: 39
+miner4 failed to solve puzzle in attempt: 51
+Miner1 failed to solve puzzle in attempt: 45
+miner4 failed to solve puzzle in attempt: 52
+miner5 failed to solve puzzle in attempt: 40
+Miner1 failed to solve puzzle in attempt: 46
+miner4 failed to solve puzzle in attempt: 53
+miner5 failed to solve puzzle in attempt: 41
+miner5 failed to solve puzzle in attempt: 42
+miner5 failed to solve puzzle in attempt: 43
+Miner1 failed to solve puzzle in attempt: 47
+miner5 failed to solve puzzle in attempt: 44
+miner5 failed to solve puzzle in attempt: 45
+miner5 failed to solve puzzle in attempt: 46
+miner4 failed to solve puzzle in attempt: 54
+Miner1 failed to solve puzzle in attempt: 48
+Miner1 failed to solve puzzle in attempt: 49
+miner4 failed to solve puzzle in attempt: 55
+Miner1 failed to solve puzzle in attempt: 50
+miner4 failed to solve puzzle in attempt: 56
+miner5 failed to solve puzzle in attempt: 47
+miner5 failed to solve puzzle in attempt: 48
+miner4 failed to solve puzzle in attempt: 57
+Miner1 failed to solve puzzle in attempt: 51
+miner4 failed to solve puzzle in attempt: 58
+miner5 failed to solve puzzle in attempt: 49
+miner4 failed to solve puzzle in attempt: 59
+miner5 failed to solve puzzle in attempt: 50
+miner4 failed to solve puzzle in attempt: 60
+miner4 failed to solve puzzle in attempt: 61
+Miner1 failed to solve puzzle in attempt: 52
+miner5 failed to solve puzzle in attempt: 51
+miner4 failed to solve puzzle in attempt: 62
+miner5 failed to solve puzzle in attempt: 52
+Miner1 failed to solve puzzle in attempt: 53
+miner4 failed to solve puzzle in attempt: 63
+Miner1 failed to solve puzzle in attempt: 54
+miner5 failed to solve puzzle in attempt: 53
+Miner1 failed to solve puzzle in attempt: 55
+miner5 failed to solve puzzle in attempt: 54
+miner4 failed to solve puzzle in attempt: 64
+miner4 failed to solve puzzle in attempt: 65
+miner4 failed to solve puzzle in attempt: 66
+miner4 failed to solve puzzle in attempt: 67
+miner5 failed to solve puzzle in attempt: 55
+Miner1 failed to solve puzzle in attempt: 56
+miner4 failed to solve puzzle in attempt: 68
+Miner1 failed to solve puzzle in attempt: 57
+miner5 failed to solve puzzle in attempt: 56
+miner4 failed to solve puzzle in attempt: 69
+Miner1 failed to solve puzzle in attempt: 58
+miner5 failed to solve puzzle in attempt: 57
+miner4 failed to solve puzzle in attempt: 70
+miner5 failed to solve puzzle in attempt: 58
+Miner1 failed to solve puzzle in attempt: 59
+miner4 failed to solve puzzle in attempt: 71
+miner5 failed to solve puzzle in attempt: 59
+miner5 failed to solve puzzle in attempt: 60
+miner5 failed to solve puzzle in attempt: 61
+Miner1 failed to solve puzzle in attempt: 60
+miner5 failed to solve puzzle in attempt: 62
+miner4 failed to solve puzzle in attempt: 72
+miner4 failed to solve puzzle in attempt: 73
+miner5 failed to solve puzzle in attempt: 63
+miner5 failed to solve puzzle in attempt: 64
+Miner1 failed to solve puzzle in attempt: 61
+Miner1 failed to solve puzzle in attempt: 62
+miner4 failed to solve puzzle in attempt: 74
+miner4 failed to solve puzzle in attempt: 75
+miner4 failed to solve puzzle in attempt: 76
+miner5 failed to solve puzzle in attempt: 65
+miner5 failed to solve puzzle in attempt: 66
+miner4 failed to solve puzzle in attempt: 77
+Miner1 failed to solve puzzle in attempt: 63
+miner5 failed to solve puzzle in attempt: 67
+miner4 failed to solve puzzle in attempt: 78
+miner5 failed to solve puzzle in attempt: 68
+Miner1 failed to solve puzzle in attempt: 64
+Miner1 failed to solve puzzle in attempt: 65
+miner4 failed to solve puzzle in attempt: 79
+Miner1 failed to solve puzzle in attempt: 66
+Miner1 failed to solve puzzle in attempt: 67
+miner4 failed to solve puzzle in attempt: 80
+miner4 failed to solve puzzle in attempt: 81
+miner5 failed to solve puzzle in attempt: 69
+miner4 failed to solve puzzle in attempt: 82
+Miner1 failed to solve puzzle in attempt: 68
+miner5 failed to solve puzzle in attempt: 70
+miner5 failed to solve puzzle in attempt: 71
+miner4 failed to solve puzzle in attempt: 83
+Miner1 failed to solve puzzle in attempt: 69
+miner5 failed to solve puzzle in attempt: 72
+miner4 failed to solve puzzle in attempt: 84
+miner5 failed to solve puzzle in attempt: 73
+Miner1 failed to solve puzzle in attempt: 70
+miner4 failed to solve puzzle in attempt: 85
+miner5 failed to solve puzzle in attempt: 74
+miner4 failed to solve puzzle in attempt: 86
+Miner1 failed to solve puzzle in attempt: 71
+miner4 failed to solve puzzle in attempt: 87
+miner5 failed to solve puzzle in attempt: 75
+miner5 failed to solve puzzle in attempt: 76
+miner5 failed to solve puzzle in attempt: 77
+miner5 failed to solve puzzle in attempt: 78
+Miner1 failed to solve puzzle in attempt: 72
+miner4 failed to solve puzzle in attempt: 88
+Miner1 failed to solve puzzle in attempt: 73
+miner5 failed to solve puzzle in attempt: 79
+Miner1 failed to solve puzzle in attempt: 74
+miner5 failed to solve puzzle in attempt: 80
+miner4 failed to solve puzzle in attempt: 89
+Miner1 failed to solve puzzle in attempt: 75
+miner4 failed to solve puzzle in attempt: 90
+miner5 failed to solve puzzle in attempt: 81
+miner4 failed to solve puzzle in attempt: 91
+Miner1 failed to solve puzzle in attempt: 76
+miner4 failed to solve puzzle in attempt: 92
+miner5 failed to solve puzzle in attempt: 82
+Miner1 failed to solve puzzle in attempt: 77
+miner5 failed to solve puzzle in attempt: 83
+miner4 failed to solve puzzle in attempt: 93
+miner4 failed to solve puzzle in attempt: 94
+miner5 failed to solve puzzle in attempt: 84
+Miner1 failed to solve puzzle in attempt: 78
+Miner1 failed to solve puzzle in attempt: 79
+miner4 failed to solve puzzle in attempt: 95
+miner4 failed to solve puzzle in attempt: 96
+miner5 failed to solve puzzle in attempt: 85
+Miner1 failed to solve puzzle in attempt: 80
+Miner1 failed to solve puzzle in attempt: 81
+miner5 failed to solve puzzle in attempt: 86
+Miner1 failed to solve puzzle in attempt: 82
+Miner1 failed to solve puzzle in attempt: 83
+miner4 failed to solve puzzle in attempt: 97
+miner5 failed to solve puzzle in attempt: 87
+miner5 failed to solve puzzle in attempt: 88
+Miner1 failed to solve puzzle in attempt: 84
+miner4 failed to solve puzzle in attempt: 98
+miner4 failed to solve puzzle in attempt: 99
+miner4 failed to solve puzzle in attempt: 100
+miner5 failed to solve puzzle in attempt: 89
+Miner1 failed to solve puzzle in attempt: 85
+Miner1 failed to solve puzzle in attempt: 86
+miner4 failed to solve puzzle in attempt: 101
+miner5 failed to solve puzzle in attempt: 90
+miner4 failed to solve puzzle in attempt: 102
+miner5 failed to solve puzzle in attempt: 91
+Miner1 failed to solve puzzle in attempt: 87
+Miner1 failed to solve puzzle in attempt: 88
+miner5 failed to solve puzzle in attempt: 92
+miner4 failed to solve puzzle in attempt: 103
+miner5 failed to solve puzzle in attempt: 93
+miner5 failed to solve puzzle in attempt: 94
+miner4 failed to solve puzzle in attempt: 104
+Miner1 failed to solve puzzle in attempt: 89
+Miner1 failed to solve puzzle in attempt: 90
+miner5 failed to solve puzzle in attempt: 95
+miner4 failed to solve puzzle in attempt: 105
+miner5 failed to solve puzzle in attempt: 96
+Miner1 failed to solve puzzle in attempt: 91
+miner5 failed to solve puzzle in attempt: 97
+miner4 failed to solve puzzle in attempt: 106
+miner5 failed to solve puzzle in attempt: 98
+Miner1 failed to solve puzzle in attempt: 92
+miner5 failed to solve puzzle in attempt: 99
+miner4 failed to solve puzzle in attempt: 107
+miner5 failed to solve puzzle in attempt: 100
+Miner1 failed to solve puzzle in attempt: 93
+miner4 failed to solve puzzle in attempt: 108
+miner5 failed to solve puzzle in attempt: 101
+Miner1 failed to solve puzzle in attempt: 94
+miner5 failed to solve puzzle in attempt: 102
+miner4 failed to solve puzzle in attempt: 109
+miner5 failed to solve puzzle in attempt: 103
+Miner1 failed to solve puzzle in attempt: 95
+Miner1 failed to solve puzzle in attempt: 96
+miner5 failed to solve puzzle in attempt: 104
+miner5 failed to solve puzzle in attempt: 105
+Miner1 failed to solve puzzle in attempt: 97
+miner4 failed to solve puzzle in attempt: 110
+miner4 failed to solve puzzle in attempt: 111
+miner5 failed to solve puzzle in attempt: 106
+miner4 failed to solve puzzle in attempt: 112
+Miner1 failed to solve puzzle in attempt: 98
+miner4 failed to solve puzzle in attempt: 113
+miner5 failed to solve puzzle in attempt: 107
+Miner1 failed to solve puzzle in attempt: 99
+miner4 failed to solve puzzle in attempt: 114
+miner4 failed to solve puzzle in attempt: 115
+miner5 failed to solve puzzle in attempt: 108
+Miner1 failed to solve puzzle in attempt: 100
+miner4 failed to solve puzzle in attempt: 116
+miner4 failed to solve puzzle in attempt: 117
+miner5 failed to solve puzzle in attempt: 109
+Miner1 failed to solve puzzle in attempt: 101
+Miner1 failed to solve puzzle in attempt: 102
+miner5 failed to solve puzzle in attempt: 110
+Miner1 failed to solve puzzle in attempt: 103
+miner4 failed to solve puzzle in attempt: 118
+miner5 failed to solve puzzle in attempt: 111
+miner4 failed to solve puzzle in attempt: 119
+Miner1 failed to solve puzzle in attempt: 104
+miner5 failed to solve puzzle in attempt: 112
+miner4 failed to solve puzzle in attempt: 120
+miner4 failed to solve puzzle in attempt: 121
+miner4 failed to solve puzzle in attempt: 122
+Miner1 failed to solve puzzle in attempt: 105
+miner4 failed to solve puzzle in attempt: 123
+Miner1 failed to solve puzzle in attempt: 106
+miner5 failed to solve puzzle in attempt: 113
+miner4 failed to solve puzzle in attempt: 124
+miner5 failed to solve puzzle in attempt: 114
+Miner1 failed to solve puzzle in attempt: 107
+miner4 failed to solve puzzle in attempt: 125
+miner5 failed to solve puzzle in attempt: 115
+miner4 failed to solve puzzle in attempt: 126
+Miner1 failed to solve puzzle in attempt: 108
+miner5 failed to solve puzzle in attempt: 116
+miner4 failed to solve puzzle in attempt: 127
+Miner1 failed to solve puzzle in attempt: 109
+miner4 failed to solve puzzle in attempt: 128
+miner5 failed to solve puzzle in attempt: 117
+Miner1 failed to solve puzzle in attempt: 110
+miner4 failed to solve puzzle in attempt: 129
+miner5 failed to solve puzzle in attempt: 118
+miner5 failed to solve puzzle in attempt: 119
+miner4 failed to solve puzzle in attempt: 130
+miner4 failed to solve puzzle in attempt: 131
+miner5 failed to solve puzzle in attempt: 120
+Miner1 failed to solve puzzle in attempt: 111
+miner5 failed to solve puzzle in attempt: 121
+Miner1 failed to solve puzzle in attempt: 112
+miner4 failed to solve puzzle in attempt: 132
+miner5 failed to solve puzzle in attempt: 122
+Miner1 failed to solve puzzle in attempt: 113
+Miner1 failed to solve puzzle in attempt: 114
+Miner1 failed to solve puzzle in attempt: 115
+miner5 failed to solve puzzle in attempt: 123
+miner4 failed to solve puzzle in attempt: 133
+miner5 failed to solve puzzle in attempt: 124
+Miner1 failed to solve puzzle in attempt: 116
+miner5 failed to solve puzzle in attempt: 125
+miner4 failed to solve puzzle in attempt: 134
+Miner1 failed to solve puzzle in attempt: 117
+miner4 failed to solve puzzle in attempt: 135
+Miner1 failed to solve puzzle in attempt: 118
+miner5 failed to solve puzzle in attempt: 126
+miner4 failed to solve puzzle in attempt: 136
+Miner1 failed to solve puzzle in attempt: 119
+miner4 failed to solve puzzle in attempt: 137
+miner4 failed to solve puzzle in attempt: 138
+miner5 failed to solve puzzle in attempt: 127
+miner4 failed to solve puzzle in attempt: 139
+miner5 failed to solve puzzle in attempt: 128
+Miner1 failed to solve puzzle in attempt: 120
+miner5 successfully Solve puzzle in attempt: 129
+miner5is mining transaction: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+miner5 IS OUT!
+miner4 failed to solve puzzle in attempt: 140
+Miner1 failed to solve puzzle in attempt: 121
+Miner1 failed to solve puzzle in attempt: 122
+miner4 failed to solve puzzle in attempt: 141
+Miner1 failed to solve puzzle in attempt: 123
+miner4 failed to solve puzzle in attempt: 142
+Miner1 failed to solve puzzle in attempt: 124
+Miner1 failed to solve puzzle in attempt: 125
+miner4 failed to solve puzzle in attempt: 143
+Miner1 failed to solve puzzle in attempt: 126
+miner4 failed to solve puzzle in attempt: 144
+Miner1 failed to solve puzzle in attempt: 127
+miner4 failed to solve puzzle in attempt: 145
+miner4 failed to solve puzzle in attempt: 146
+miner4 failed to solve puzzle in attempt: 147
+miner4 failed to solve puzzle in attempt: 148
+Miner1 failed to solve puzzle in attempt: 128
+Miner1 failed to solve puzzle in attempt: 129
+miner4 failed to solve puzzle in attempt: 149
+Miner1 failed to solve puzzle in attempt: 130
+miner4 failed to solve puzzle in attempt: 150
+Miner1 failed to solve puzzle in attempt: 131
+miner4 failed to solve puzzle in attempt: 151
+miner4 failed to solve puzzle in attempt: 152
+Miner1 failed to solve puzzle in attempt: 132
+miner4 failed to solve puzzle in attempt: 153
+Miner1 failed to solve puzzle in attempt: 133
+miner4 failed to solve puzzle in attempt: 154
+miner4 failed to solve puzzle in attempt: 155
+Miner1 failed to solve puzzle in attempt: 134
+miner4 failed to solve puzzle in attempt: 156
+Miner1 failed to solve puzzle in attempt: 135
+miner4 failed to solve puzzle in attempt: 157
+Miner1 failed to solve puzzle in attempt: 136
+Miner1 failed to solve puzzle in attempt: 137
+miner4 failed to solve puzzle in attempt: 158
+Miner1 failed to solve puzzle in attempt: 138
+Miner1 failed to solve puzzle in attempt: 139
+miner4 failed to solve puzzle in attempt: 159
+miner4 failed to solve puzzle in attempt: 160
+Miner1 failed to solve puzzle in attempt: 140
+miner4 failed to solve puzzle in attempt: 161
+miner4 failed to solve puzzle in attempt: 162
+Miner1 failed to solve puzzle in attempt: 141
+Miner1 successfully Solve puzzle in attempt: 142
+Miner1is mining transaction: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+Miner1 IS OUT!
+miner4 failed to solve puzzle in attempt: 163
+miner4 failed to solve puzzle in attempt: 164
+miner4 failed to solve puzzle in attempt: 165
+miner4 failed to solve puzzle in attempt: 166
+miner4 failed to solve puzzle in attempt: 167
+miner4 failed to solve puzzle in attempt: 168
+miner4 failed to solve puzzle in attempt: 169
+miner4 failed to solve puzzle in attempt: 170
+miner4 failed to solve puzzle in attempt: 171
+miner4 failed to solve puzzle in attempt: 172
+miner4 failed to solve puzzle in attempt: 173
+miner4 failed to solve puzzle in attempt: 174
+miner4 failed to solve puzzle in attempt: 175
+miner4 failed to solve puzzle in attempt: 176
+miner4 failed to solve puzzle in attempt: 177
+miner4 failed to solve puzzle in attempt: 178
+miner4 failed to solve puzzle in attempt: 179
+miner4 failed to solve puzzle in attempt: 180
+miner4 failed to solve puzzle in attempt: 181
+miner4 failed to solve puzzle in attempt: 182
+miner4 failed to solve puzzle in attempt: 183
+miner4 failed to solve puzzle in attempt: 184
+miner4 failed to solve puzzle in attempt: 185
+miner4 failed to solve puzzle in attempt: 186
+miner4 failed to solve puzzle in attempt: 187
+miner4 failed to solve puzzle in attempt: 188
+miner4 failed to solve puzzle in attempt: 189
+miner4 failed to solve puzzle in attempt: 190
+miner4 failed to solve puzzle in attempt: 191
+miner4 failed to solve puzzle in attempt: 192
+miner4 failed to solve puzzle in attempt: 193
+miner4 failed to solve puzzle in attempt: 194
+miner4 failed to solve puzzle in attempt: 195
+miner4 failed to solve puzzle in attempt: 196
+miner4 failed to solve puzzle in attempt: 197
+miner4 failed to solve puzzle in attempt: 198
+miner4 failed to solve puzzle in attempt: 199
+miner4 failed to solve puzzle in attempt: 200
+miner4 failed to solve puzzle in attempt: 201
+miner4 failed to solve puzzle in attempt: 202
+miner4 failed to solve puzzle in attempt: 203
+miner4 failed to solve puzzle in attempt: 204
+miner4 failed to solve puzzle in attempt: 205
+miner4 failed to solve puzzle in attempt: 206
+miner4 failed to solve puzzle in attempt: 207
+miner4 failed to solve puzzle in attempt: 208
+miner4 failed to solve puzzle in attempt: 209
+miner4 failed to solve puzzle in attempt: 210
+miner4 failed to solve puzzle in attempt: 211
+miner4 failed to solve puzzle in attempt: 212
+miner4 failed to solve puzzle in attempt: 213
+miner4 failed to solve puzzle in attempt: 214
+miner4 failed to solve puzzle in attempt: 215
+miner4 failed to solve puzzle in attempt: 216
+miner4 failed to solve puzzle in attempt: 217
+miner4 failed to solve puzzle in attempt: 218
+miner4 failed to solve puzzle in attempt: 219
+miner4 failed to solve puzzle in attempt: 220
+miner4 failed to solve puzzle in attempt: 221
+miner4 failed to solve puzzle in attempt: 222
+miner4 failed to solve puzzle in attempt: 223
+miner4 failed to solve puzzle in attempt: 224
+miner4 failed to solve puzzle in attempt: 225
+miner4 failed to solve puzzle in attempt: 226
+miner4 failed to solve puzzle in attempt: 227
+miner4 failed to solve puzzle in attempt: 228
+miner4 failed to solve puzzle in attempt: 229
+miner4 failed to solve puzzle in attempt: 230
+miner4 failed to solve puzzle in attempt: 231
+miner4 failed to solve puzzle in attempt: 232
+miner4 failed to solve puzzle in attempt: 233
+miner4 failed to solve puzzle in attempt: 234
+miner4 failed to solve puzzle in attempt: 235
+miner4 failed to solve puzzle in attempt: 236
+miner4 failed to solve puzzle in attempt: 237
+miner4 failed to solve puzzle in attempt: 238
+miner4 failed to solve puzzle in attempt: 239
+miner4 failed to solve puzzle in attempt: 240
+miner4 failed to solve puzzle in attempt: 241
+miner4 failed to solve puzzle in attempt: 242
+miner4 failed to solve puzzle in attempt: 243
+miner4 failed to solve puzzle in attempt: 244
+miner4 failed to solve puzzle in attempt: 245
+miner4 failed to solve puzzle in attempt: 246
+miner4 failed to solve puzzle in attempt: 247
+miner4 failed to solve puzzle in attempt: 248
+miner4 failed to solve puzzle in attempt: 249
+miner4 failed to solve puzzle in attempt: 250
+miner4 failed to solve puzzle in attempt: 251
+miner4 failed to solve puzzle in attempt: 252
+miner4 failed to solve puzzle in attempt: 253
+miner4 failed to solve puzzle in attempt: 254
+miner4 failed to solve puzzle in attempt: 255
+miner4 failed to solve puzzle in attempt: 256
+miner4 failed to solve puzzle in attempt: 257
+miner4 failed to solve puzzle in attempt: 258
+miner4 failed to solve puzzle in attempt: 259
+miner4 failed to solve puzzle in attempt: 260
+miner4 failed to solve puzzle in attempt: 261
+miner4 failed to solve puzzle in attempt: 262
+miner4 failed to solve puzzle in attempt: 263
+miner4 failed to solve puzzle in attempt: 264
+miner4 failed to solve puzzle in attempt: 265
+miner4 failed to solve puzzle in attempt: 266
+miner4 failed to solve puzzle in attempt: 267
+miner4 failed to solve puzzle in attempt: 268
+miner4 failed to solve puzzle in attempt: 269
+miner4 failed to solve puzzle in attempt: 270
+miner4 failed to solve puzzle in attempt: 271
+miner4 failed to solve puzzle in attempt: 272
+miner4 failed to solve puzzle in attempt: 273
+miner4 failed to solve puzzle in attempt: 274
+miner4 failed to solve puzzle in attempt: 275
+miner4 failed to solve puzzle in attempt: 276
+miner4 failed to solve puzzle in attempt: 277
+miner4 failed to solve puzzle in attempt: 278
+miner4 failed to solve puzzle in attempt: 279
+miner4 failed to solve puzzle in attempt: 280
+miner4 failed to solve puzzle in attempt: 281
+miner4 failed to solve puzzle in attempt: 282
+miner4 failed to solve puzzle in attempt: 283
+miner4 failed to solve puzzle in attempt: 284
+miner4 failed to solve puzzle in attempt: 285
+miner4 failed to solve puzzle in attempt: 286
+miner4 failed to solve puzzle in attempt: 287
+miner4 failed to solve puzzle in attempt: 288
+miner4 failed to solve puzzle in attempt: 289
+miner4 failed to solve puzzle in attempt: 290
+miner4 failed to solve puzzle in attempt: 291
+miner4 failed to solve puzzle in attempt: 292
+miner4 failed to solve puzzle in attempt: 293
+miner4 failed to solve puzzle in attempt: 294
+miner4 failed to solve puzzle in attempt: 295
+miner4 failed to solve puzzle in attempt: 296
+miner4 failed to solve puzzle in attempt: 297
+miner4 failed to solve puzzle in attempt: 298
+miner4 failed to solve puzzle in attempt: 299
+miner4 failed to solve puzzle in attempt: 300
+miner4 failed to solve puzzle in attempt: 301
+miner4 failed to solve puzzle in attempt: 302
+miner4 failed to solve puzzle in attempt: 303
+miner4 failed to solve puzzle in attempt: 304
+miner4 failed to solve puzzle in attempt: 305
+miner4 failed to solve puzzle in attempt: 306
+miner4 failed to solve puzzle in attempt: 307
+miner4 failed to solve puzzle in attempt: 308
+miner4 failed to solve puzzle in attempt: 309
+miner4 failed to solve puzzle in attempt: 310
+miner4 failed to solve puzzle in attempt: 311
+miner4 failed to solve puzzle in attempt: 312
+miner4 failed to solve puzzle in attempt: 313
+miner4 failed to solve puzzle in attempt: 314
+miner4 failed to solve puzzle in attempt: 315
+miner4 failed to solve puzzle in attempt: 316
+miner4 failed to solve puzzle in attempt: 317
+miner4 failed to solve puzzle in attempt: 318
+miner4 failed to solve puzzle in attempt: 319
+miner4 failed to solve puzzle in attempt: 320
+miner4 failed to solve puzzle in attempt: 321
+miner4 failed to solve puzzle in attempt: 322
+miner4 failed to solve puzzle in attempt: 323
+miner4 failed to solve puzzle in attempt: 324
+miner4 failed to solve puzzle in attempt: 325
+miner4 failed to solve puzzle in attempt: 326
+miner4 failed to solve puzzle in attempt: 327
+miner4 failed to solve puzzle in attempt: 328
+miner4 failed to solve puzzle in attempt: 329
+miner4 failed to solve puzzle in attempt: 330
+miner4 failed to solve puzzle in attempt: 331
+miner4 failed to solve puzzle in attempt: 332
+miner4 failed to solve puzzle in attempt: 333
+miner4 failed to solve puzzle in attempt: 334
+miner4 failed to solve puzzle in attempt: 335
+miner4 failed to solve puzzle in attempt: 336
+miner4 failed to solve puzzle in attempt: 337
+miner4 failed to solve puzzle in attempt: 338
+miner4 failed to solve puzzle in attempt: 339
+miner4 failed to solve puzzle in attempt: 340
+miner4 failed to solve puzzle in attempt: 341
+miner4 failed to solve puzzle in attempt: 342
+miner4 failed to solve puzzle in attempt: 343
+miner4 failed to solve puzzle in attempt: 344
+miner4 failed to solve puzzle in attempt: 345
+miner4 failed to solve puzzle in attempt: 346
+miner4 failed to solve puzzle in attempt: 347
+miner4 failed to solve puzzle in attempt: 348
+miner4 failed to solve puzzle in attempt: 349
+miner4 failed to solve puzzle in attempt: 350
+miner4 failed to solve puzzle in attempt: 351
+miner4 failed to solve puzzle in attempt: 352
+miner4 failed to solve puzzle in attempt: 353
+miner4 failed to solve puzzle in attempt: 354
+miner4 failed to solve puzzle in attempt: 355
+miner4 successfully Solve puzzle in attempt: 356
+miner4is mining transaction: Transaction{inputs=[TransactionInput { prevTxId: txid0/ outputIndex: 0/ pubKey: EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+)], outputs=[TransactionOutput{value=100, pubKey='EC Public Key [1d:f2:05:e8:08:e7:ed:66:8f:da:e5:55:d9:76:9b:46:43:8f:5d:3c]
+            X: 9b3a4b0442b2fc518838abe2b2c1575081f2f52a14e2e6edfd7bf56099d7ac18
+            Y: 3205ef07a48d827a40973f776ec76ad5c69858fe5cacdb4ec937e7af279859a7
+'}, TransactionOutput{value=100, pubKey='EC Public Key [a4:d8:51:d6:66:6f:1c:62:8a:d4:3a:c2:81:0e:94:d1:06:bc:48:d1]
+            X: 5c5e2139b46bf71eac9db9c35eebeb0ec866af9a3733bfb821ee03f2cd930c79
+            Y: 2a791ea61de2ef013958a0a498d37df38b0962c9d2d9bc2baa1de38f66b475a8
+'}]}
+miner4 IS OUT!

@@ -13,10 +13,10 @@ public class TransactionPool {
         boolean isValid = TransactionUtils.verifyTransaction(tx);
         if(isValid) {
             // Add the new Utxos to UtxoSet
-            UTXOSet.addUtxosTransaction(tx);
+            //UTXOSet.addUtxosTransaction(tx);
 
             // Update UTXOs
-            UTXOSet.removeConsumedUtxosTransaction(tx);
+            //UTXOSet.removeConsumedUtxosTransaction(tx);
 
             // Add transaction to transactionPool
             mempool.add(tx);
