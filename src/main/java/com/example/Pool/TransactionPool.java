@@ -13,7 +13,6 @@ public class TransactionPool {
     public static boolean AddToPool(Transaction tx) {
         boolean isValid = TransactionUtils.verifyTransaction(tx);
         if(isValid) {
-            // Add transaction to transactionPool
             mempool.add(tx);
         }
         return isValid;

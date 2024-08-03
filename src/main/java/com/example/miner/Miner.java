@@ -45,8 +45,6 @@ public class Miner extends Thread {
                 tx = getTransactionFromPool();
             }
 
-            
-
             // start new minning round after recent block mined
             minningRound = true;
 
@@ -113,9 +111,8 @@ public class Miner extends Thread {
             TransactionPool.removeTransaction(tx);
 
             // Create Block with Mined Transaction
-            minedTransaction = tx;
             Block minedBlock = new Block(tx, this);
-            System.out.println(minedBlock);
+            OutputWriter.writeOutput(minedBlock.toString());
             return true;
         }
         OutputWriter.writeOutput("Transaction verification : not valid transaction");
