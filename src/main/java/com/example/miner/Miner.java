@@ -4,13 +4,15 @@ import com.example.Block.Block;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionCreator;
 import com.example.Transaction.UTXO;
 import com.example.Wallet.Wallet;
-import com.example.utils.OutputWriter;
 import com.example.utils.TransactionUtils;
+import com.example.Logger.Logger;
 
 import java.util.List;
 import java.util.Random;
+
 
 public class Miner extends Thread {
     public String minerName;
@@ -35,7 +37,8 @@ public class Miner extends Thread {
 
             // handle empty transactionPool : infinte loop with one second delay between loops until transaction added
             while(tx == null) {
-                OutputWriter.writeOutput(minerName + " found no transactions to mine yet.");
+                Logger.writeLogs(this,minerName + " found no transactions to mine yet.");
+                
                 try {
                     // Wait second to try to getTransaction from pool 
                     Thread.sleep(1000);
@@ -49,27 +52,23 @@ public class Miner extends Thread {
             minningRound = true;
 
             // Try to mine the transaction (simplified puzzle)
-            OutputWriter.writeOutput(minerName + " trying to solve puzzle: " + tx.getSignature());
             int attempts = 0;
 
             while(minningRound) {
                 attempts++;
                 boolean solved = solveMinningPuzzle();
                 if (solved) {
-                    OutputWriter.writeOutput(minerName + " successfully Solve puzzle in attempt: " + attempts);
+                    Logger.writeLogs(this, minerName + " successfully Solve puzzle in attempt: " + attempts);
                     mineTransaction(tx);
-                    OutputWriter.writeOutput(minerName + " CREATED BLOCK SUCCESSFULY!");
+                    Logger.writeLogs(this, minerName + " CREATED BLOCK SUCCESSFULY!");
                     roundFinished();
-                } 
-                else {
-                    OutputWriter.writeOutput(minerName + " failed to solve puzzle in attempt: " + attempts);
                 }
 
                 // Sleep to simulate time between mining attempts
                 try {
                     Thread.sleep(new Random().nextInt(2000));
                 } catch (InterruptedException e) {
-                    OutputWriter.writeOutput("Error: " + e.getMessage());
+                    Logger.writeLogs(this, "Error: " + e.getMessage());
                 }
             }    
         }
@@ -97,7 +96,7 @@ public class Miner extends Thread {
     }
 
     private boolean mineTransaction(Transaction tx) {
-        OutputWriter.writeOutput(minerName + "is mining transaction: " + tx);
+        Logger.writeLogs(tx, minerName + "is mining transaction: " + tx);
         // Miner Checking transaction validity (Second time checking overall)
         if(TransactionUtils.verifyTransaction(tx)) {
             // Add the new Utxos to UtxoSet
@@ -112,10 +111,10 @@ public class Miner extends Thread {
 
             // Create Block with Mined Transaction
             Block minedBlock = new Block(tx, this);
-            OutputWriter.writeOutput(minedBlock.toString());
+            Logger.writeLogs(minedBlock, minedBlock.toString());
             return true;
         }
-        OutputWriter.writeOutput("Transaction verification : not valid transaction");
+        Logger.writeLogs(this, "Transaction verification by " + minerName + ": not valid transaction");
         return false;
     }
 
@@ -125,15 +124,15 @@ public class Miner extends Thread {
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = TransactionUtils.createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
-            OutputWriter.writeOutput("Transaction created: " + t1);
+            Logger.writeLogs(t1, "Transaction created: " + t1);
             boolean isValid = TransactionUtils.propagateTransaction(t1);
-            OutputWriter.writeOutput("Added to network validity: " + isValid);
+            Logger.writeLogs(t1, "Added to network validity: " + isValid);
             List<Transaction> mempool = TransactionPool.getMemPool();
             for(Transaction tx: mempool) {
-                OutputWriter.writeOutput("Transaction in mempool: " + tx.getPublicKey());
+                Logger.writeLogs(t1, "Transaction in mempool: " + tx.getPublicKey());
             }
         } catch (Exception e) {
-            OutputWriter.writeOutput("Error: " + e.getMessage());
+            Logger.writeLogs(h2tayWallet, "Error: " + e.getMessage());
         }
         
         // Create and start multiple miners
@@ -161,8 +160,37 @@ public class Miner extends Thread {
         
     }
 
+    //test5: test multiple transaction in mempool
+    public static void test2() {
+        // Create multiple transaction and added it to TransactionPOOL
+        TransactionCreator.test1();
+
+        // Create and start multiple Miners
+        Miner miner1 = new Miner("Miner1");
+        Miner miner2 = new Miner("Miner2");
+        Miner miner3 = new Miner("Miner3");
+        Miner miner4 = new Miner("miner4");
+        Miner miner5 = new Miner("miner5");
+
+        miner1.start();
+        miner2.start();
+        miner3.start();
+        miner4.start();
+        miner5.start();
+
+        try {
+            miner1.join();
+            miner2.join();
+            miner3.join();
+            miner4.join();
+            miner5.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
-        test1();
+        test2();
     }
 }
