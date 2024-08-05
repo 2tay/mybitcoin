@@ -79,8 +79,7 @@ public class TransactionUtils {
     }
 
     //transaction creation
-    public static Transaction createTransaction(Wallet senderWallet, PublicKey recipient, int amount) throws Exception {
-        List<UTXO> availableUTXOs = UTXOSet.findUTXOs(senderWallet.getPublicKey());
+    public static Transaction createTransaction(Wallet senderWallet, PublicKey recipient, int amount, List<UTXO> availableUTXOs) throws Exception {
         List<TransactionInput> inputs = new ArrayList<>();
         int totalValue = 0;
 
@@ -148,7 +147,7 @@ public class TransactionUtils {
         Wallet h2tayWallet = UTXO.genesisUtxo();
         Wallet recipient = new Wallet();
         try {
-            Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+            Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100, h2tayWallet.getAllUTXOs());
             System.out.println("Transaction created: " + t1);
             boolean isValid = verifySignature(t1.toString(), t1.getSignature(), t1.getPublicKey());
             System.out.println("Transaction IsValid: " + isValid);
@@ -167,7 +166,7 @@ public class TransactionUtils {
         Wallet h2tayWallet = UTXO.genesisUtxo();
         Wallet recipient = new Wallet();
         try {
-            Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+            Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100, h2tayWallet.getAllUTXOs());
             System.out.println("Transaction created: " + t1);
             boolean isValid = propagateTransaction(t1);
             System.out.println("Added to network validity: " + isValid);
@@ -186,12 +185,11 @@ public class TransactionUtils {
         Wallet recipient = new Wallet();
             Transaction t1;
             try {
-                t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+                t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100, h2tayWallet.getAllUTXOs());
                 System.out.println("Transaction created: " + t1);
                 boolean isValid = verifyTransaction(t1);
                 System.err.println("transaction isValid: " + isValid);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
     }

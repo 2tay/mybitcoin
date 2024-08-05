@@ -1,9 +1,11 @@
 package com.example.miner;
 
 import com.example.Block.Block;
+import com.example.Blockchain.Blockchain;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionCreator;
 import com.example.Transaction.UTXO;
 import com.example.Wallet.Wallet;
 import com.example.utils.OutputWriter;
@@ -34,7 +36,11 @@ public class Miner extends Thread {
             }
 
             // handle empty transactionPool : infinte loop with one second delay between loops until transaction added
+            int fetchingTx = 0;
             while(tx == null) {
+                if(fetchingTx == 4) {
+                    return;
+                }
                 OutputWriter.writeOutput(minerName + " found no transactions to mine yet.");
                 try {
                     // Wait second to try to getTransaction from pool 
@@ -43,6 +49,7 @@ public class Miner extends Thread {
                     e.printStackTrace();
                 }
                 tx = getTransactionFromPool();
+                fetchingTx++;
             }
 
             // start new minning round after recent block mined
@@ -112,7 +119,10 @@ public class Miner extends Thread {
 
             // Create Block with Mined Transaction
             Block minedBlock = new Block(tx, this);
-            OutputWriter.writeOutput(minedBlock.toString());
+            Blockchain.addBlock(minedBlock);
+            OutputWriter.writeOutput("Block mined" + minedBlock.toString());
+            int blocks = Blockchain.getBlockchain().size();
+            System.out.println("Blockchain size: " + blocks);
             return true;
         }
         OutputWriter.writeOutput("Transaction verification : not valid transaction");
@@ -124,7 +134,7 @@ public class Miner extends Thread {
         Wallet h2tayWallet = UTXO.genesisUtxo();
         Wallet recipient = new Wallet();
         try {
-            Transaction t1 = TransactionUtils.createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
+            Transaction t1 = TransactionUtils.createTransaction(h2tayWallet, recipient.getPublicKey(), 100, h2tayWallet.getAllUTXOs());
             OutputWriter.writeOutput("Transaction created: " + t1);
             boolean isValid = TransactionUtils.propagateTransaction(t1);
             OutputWriter.writeOutput("Added to network validity: " + isValid);
@@ -161,8 +171,33 @@ public class Miner extends Thread {
         
     }
 
+    public static void test2() {
+        Wallet hakimWallet = UTXO.genesisUtxo();
+        Wallet w2 = new Wallet();
+        Wallet w3 = new Wallet();
+
+        TransactionCreator tc1 = new TransactionCreator(hakimWallet, w2, 90);
+        TransactionCreator tc2 = new TransactionCreator(hakimWallet, w2, 90);
+        tc1.start();
+        tc2.start();
+
+        Miner miner1 = new Miner("Miner1");
+        Miner miner2 = new Miner("Miner2");
+        Miner miner3 = new Miner("Miner3");
+        Miner miner4 = new Miner("miner4");
+        Miner miner5 = new Miner("miner5");
+
+        miner1.start();
+        miner2.start();
+        miner3.start();
+        miner4.start();
+        miner5.start();
+
+
+    }
+
 
     public static void main(String[] args) {
-        test1();
+        test2();
     }
 }

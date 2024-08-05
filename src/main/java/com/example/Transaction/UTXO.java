@@ -27,6 +27,7 @@ public class UTXO {
         Wallet h2tayWallet = new Wallet();
         UTXO firstUtxo = new UTXO("txid0", 0, 200, h2tayWallet.getPublicKey());
         UTXOSet.addUTXO(firstUtxo);
+        h2tayWallet.addUtxoToPool(firstUtxo);
         return h2tayWallet;
     }
 
