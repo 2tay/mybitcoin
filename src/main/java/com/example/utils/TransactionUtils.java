@@ -80,7 +80,7 @@ public class TransactionUtils {
 
     //transaction creation
     public static Transaction createTransaction(Wallet senderWallet, PublicKey recipient, int amount) throws Exception {
-        List<UTXO> availableUTXOs = UTXOSet.findUTXOs(senderWallet.getPublicKey());
+        List<UTXO> availableUTXOs = senderWallet.getUtxoPool().getAllUTXOs();
         List<TransactionInput> inputs = new ArrayList<>();
         int totalValue = 0;
 
@@ -95,7 +95,7 @@ public class TransactionUtils {
 
         // Check if totalValue covers the amount
         if (totalValue < amount) {
-            throw new IllegalArgumentException("Not enough funds");
+            return null;
         }
 
         // Create transaction
@@ -117,11 +117,8 @@ public class TransactionUtils {
         String signature = senderWallet.signData(transactionData);
         transaction.setSignature(signature);
 
-        //add the new Utxos to UtxoSet
-        //UTXOSet.addUtxosTransaction(transaction);
-
-        // Update UTXOs
-        //UTXOSet.removeConsumedUtxosTransaction(transaction);
+        // Remove inputs Utxos from WalletUtxosPOOL
+        senderWallet.getUtxoPool().removeConsumedUtxos(transaction);
 
         return transaction;
     }
