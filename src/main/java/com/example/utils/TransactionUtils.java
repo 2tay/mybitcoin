@@ -143,7 +143,7 @@ public class TransactionUtils {
     //test2: test createTransaction function
     public static void test2() {
         Wallet h2tayWallet = new Wallet();
-        UTXO.genesisUtxo(h2tayWallet);
+        UTXO.genesisUtxo(h2tayWallet, 200);
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
@@ -163,7 +163,7 @@ public class TransactionUtils {
     //test3: test propagate to network
     public static void test3() {
         Wallet h2tayWallet = new Wallet();
-        UTXO.genesisUtxo(h2tayWallet);
+        UTXO.genesisUtxo(h2tayWallet, 200);
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
@@ -182,7 +182,7 @@ public class TransactionUtils {
     //test4: test verifyTransaction
     public static void test4() {
         Wallet h2tayWallet = new Wallet();
-        UTXO.genesisUtxo(h2tayWallet);
+        UTXO.genesisUtxo(h2tayWallet, 200);
         Wallet recipient = new Wallet();
             Transaction t1;
             try {

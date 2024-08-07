@@ -128,7 +128,7 @@ public class Miner extends Thread {
 
     public static void test1() {
         Wallet h2tayWallet = new Wallet();
-        UTXO.genesisUtxo(h2tayWallet);
+        UTXO.genesisUtxo(h2tayWallet, 200);
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = h2tayWallet.processTransaction(recipient.getPublicKey(), 100);
