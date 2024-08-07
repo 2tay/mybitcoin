@@ -43,6 +43,10 @@ public class Wallet {
         return utxosPool;
     }
 
+    public boolean getWalletRunning() {
+        return walletRunning;
+    }
+
     public String encryptDataWithPubKey(String data, PublicKey recipientPublicKey) {
         return KeyUtils.encryptWithPubKey(data, recipientPublicKey);
     }
@@ -75,7 +79,7 @@ public class Wallet {
     public Transaction processTransaction(PublicKey recipient, int amount) {
         //sequential transaction creation (one by one for same user)
         if(walletRunning) {
-            System.out.println("Wallet now is creating another transaction! can you try later.");
+            //System.out.println("Wallet now is creating another transaction! can you try later.");
             return null;
         }
         //wallet is free to create transaction

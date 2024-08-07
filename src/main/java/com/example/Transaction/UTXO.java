@@ -3,6 +3,7 @@ package com.example.Transaction;
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 import com.example.Pool.UTXOSet;
@@ -23,9 +24,10 @@ public class UTXO {
         this.publicKey = publicKey;
     }
 
-    public static void genesisUtxo(Wallet h2tayWallet, int amount) {
-        UTXO firstUtxo = new UTXO("txid0", 0, amount, h2tayWallet.getPublicKey());
-        h2tayWallet.getUtxoPool().addUTXO(firstUtxo);
+    public static void genesisUtxo(Wallet wallet, int amount) {
+        String transactionId = UUID.randomUUID().toString();
+        UTXO firstUtxo = new UTXO(transactionId, 0, amount, wallet.getPublicKey());
+        wallet.getUtxoPool().addUTXO(firstUtxo);
         UTXOSet.addUTXO(firstUtxo);
     }
 
