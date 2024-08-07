@@ -30,12 +30,14 @@ public class TransactionThread extends Thread {
                     System.out.println("Transaction created by " + Thread.currentThread().getName() + ": " + transaction);
                     break;
                 } else if(senderWallet.getWalletRunning()) {
+                    // if(transaction == null && walletRunning == true) 
                     // if wallet is already working on transaction (wallet is sequentiel in creating tx)
-                    System.out.println("Wallet now is creating another transaction! can you try later.");
-                    System.out.println(Thread.currentThread().getName() + " is waiting");
+                    System.out.println(Thread.currentThread().getName() + ": Wallet now is creating another transaction! wait a second");
                     Thread.sleep(1000);
                 } else {
+                    // if(transaction == null && walletRunning == false)
                     // if utxos on hold wait 2 second for miner to mine and return exchange money
+                    System.out.println(Thread.currentThread().getName() + ": All wallet utxos on hold or Empty! wait 2second" );
                     Thread.sleep(2000);
                 }
     
@@ -47,34 +49,46 @@ public class TransactionThread extends Thread {
 
     public static void test1() {
         // Create wallets
-        Wallet senderWallet = new Wallet();
-        Wallet recipientWallet = new Wallet();
+        Wallet w1 = new Wallet();
+        Wallet w2 = new Wallet();
 
         // give some initial utxo
-        UTXO.genesisUtxo(senderWallet, 50);
-        UTXO.genesisUtxo(senderWallet, 30);
-        UTXO.genesisUtxo(senderWallet, 10);
-        UTXO.genesisUtxo(recipientWallet, 100);
-        UTXO.genesisUtxo(recipientWallet, 10);
-        UTXO.genesisUtxo(recipientWallet, 10);
+        UTXO.genesisUtxo(w1, 50);
+        UTXO.genesisUtxo(w1, 30);
+        UTXO.genesisUtxo(w1, 10);
+        UTXO.genesisUtxo(w2, 100);
+        UTXO.genesisUtxo(w2, 10);
+        UTXO.genesisUtxo(w2, 10);
 
-        int senderBalance = senderWallet.getBalance();
-        int recipientBalance = recipientWallet.getBalance();
+        int senderBalance = w1.getBalance();
+        int recipientBalance = w2.getBalance();
         System.out.println("Sender BALANCE: " + senderBalance);
         System.out.println("Recipient BALANCE: " + recipientBalance);
 
-        // Create and start multiple transaction threads
-        TransactionThread t1 = new TransactionThread(senderWallet, recipientWallet.getPublicKey(), 5);
-        TransactionThread t2 = new TransactionThread(senderWallet, recipientWallet.getPublicKey(), 5);
-        TransactionThread t3 = new TransactionThread(senderWallet, recipientWallet.getPublicKey(), 5);
-        TransactionThread t4 = new TransactionThread(senderWallet, recipientWallet.getPublicKey(), 5);
-        TransactionThread t5 = new TransactionThread(senderWallet, recipientWallet.getPublicKey(), 5);
+        // Create and start multiple transaction threads for w1 (WALLET1)
+        TransactionThread t1 = new TransactionThread(w1, w2.getPublicKey(), 5);
+        TransactionThread t2 = new TransactionThread(w1, w2.getPublicKey(), 5);
+        TransactionThread t3 = new TransactionThread(w1, w2.getPublicKey(), 5);
+        TransactionThread t4 = new TransactionThread(w1, w2.getPublicKey(), 5);
+        TransactionThread t5 = new TransactionThread(w1, w2.getPublicKey(), 5);
 
+        // create and start multiple transaction thread for w2 (WALLET2)
+        TransactionThread t6 = new TransactionThread(w2, w1.getPublicKey(), 50);
+        TransactionThread t7 = new TransactionThread(w2, w1.getPublicKey(), 10);
+        TransactionThread t8 = new TransactionThread(w2, w1.getPublicKey(), 20);
+
+        // w1 threads
         t1.start();
         t2.start();
         t3.start();
         t4.start();
         t5.start();
+
+        // w2 threads
+        t6.start();
+        t7.start();
+        t8.start();
+
     }
 
     public static void main(String[] args) {

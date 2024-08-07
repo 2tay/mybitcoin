@@ -90,7 +90,7 @@ public class Wallet {
                 TransactionUtils.propagateTransaction(tx);
                 return tx;
             } else{
-                System.out.println("All wallet utxos on hold or Empty! try later.");
+                //System.out.println("All wallet utxos on hold or Empty! try later.");
                 return null;
             }
         } catch (Exception e) {
