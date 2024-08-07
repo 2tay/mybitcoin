@@ -38,7 +38,8 @@ public class TransactionCreator extends Thread {
 
     public static void test1() {
         // Create wallets
-        Wallet senderWallet = UTXO.genesisUtxo();
+        Wallet senderWallet = new Wallet();
+        UTXO.genesisUtxo(senderWallet);
         Wallet recipientWallet = new Wallet();
 
         // Create and start multiple TransactionCreator threads

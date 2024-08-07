@@ -127,7 +127,7 @@ public class TransactionUtils {
 
     //propagate transaction to network
     public static boolean propagateTransaction(Transaction transaction) {
-        return TransactionPool.AddToPool(transaction);
+        return TransactionPool.addToPool(transaction);
     }
 
     //tets1: test sign data and verfiy signature test function 
@@ -142,7 +142,8 @@ public class TransactionUtils {
 
     //test2: test createTransaction function
     public static void test2() {
-        Wallet h2tayWallet = UTXO.genesisUtxo();
+        Wallet h2tayWallet = new Wallet();
+        UTXO.genesisUtxo(h2tayWallet);
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
@@ -161,7 +162,8 @@ public class TransactionUtils {
 
     //test3: test propagate to network
     public static void test3() {
-        Wallet h2tayWallet = UTXO.genesisUtxo();
+        Wallet h2tayWallet = new Wallet();
+        UTXO.genesisUtxo(h2tayWallet);
         Wallet recipient = new Wallet();
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
@@ -179,7 +181,8 @@ public class TransactionUtils {
 
     //test4: test verifyTransaction
     public static void test4() {
-        Wallet h2tayWallet = UTXO.genesisUtxo();
+        Wallet h2tayWallet = new Wallet();
+        UTXO.genesisUtxo(h2tayWallet);
         Wallet recipient = new Wallet();
             Transaction t1;
             try {
@@ -188,7 +191,6 @@ public class TransactionUtils {
                 boolean isValid = verifyTransaction(t1);
                 System.err.println("transaction isValid: " + isValid);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
     }

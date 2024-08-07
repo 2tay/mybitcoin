@@ -8,10 +8,10 @@ release.properties
 
 # VS Code specific files
 .vscode/
-output.txt
 
 # Logs
 *.log
+*.txt
 
 # Others
 *.class

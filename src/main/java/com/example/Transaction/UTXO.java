@@ -23,11 +23,10 @@ public class UTXO {
         this.publicKey = publicKey;
     }
 
-    public static Wallet genesisUtxo() {
-        Wallet h2tayWallet = new Wallet();
+    public static void genesisUtxo(Wallet h2tayWallet) {
         UTXO firstUtxo = new UTXO("txid0", 0, 200, h2tayWallet.getPublicKey());
+        h2tayWallet.getUtxoPool().addUTXO(firstUtxo);
         UTXOSet.addUTXO(firstUtxo);
-        return h2tayWallet;
     }
 
     public String getUtxoId() {
@@ -81,7 +80,8 @@ public class UTXO {
 
     // test genisis utxo 
     public static void test2() {
-        UTXO.genesisUtxo();
+        Wallet h2tayWallet = new Wallet();
+        UTXO.genesisUtxo(h2tayWallet);
         List<UTXO> utxos = UTXOSet.getAllUTXOs();
         System.out.println("Genisis UTXO:");
         for(UTXO utxo: utxos) {
@@ -90,7 +90,7 @@ public class UTXO {
     }
 
     public static void main(String[] args) {
-        UTXO.test1();
+        //UTXO.test1();
         UTXO.test2();
     }
 }

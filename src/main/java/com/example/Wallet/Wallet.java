@@ -7,7 +7,6 @@ import java.security.KeyPair;
 
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
-import com.example.Transaction.TransactionInput;
 import com.example.Transaction.UTXO;
 import com.example.Wallet.WalletPool.WalletTransactionPool;
 import com.example.Wallet.WalletPool.WalletUTXOPool;
