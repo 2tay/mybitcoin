@@ -3,7 +3,6 @@ package com.example.Transaction;
 import com.example.Wallet.Wallet;
 
 import java.security.PublicKey;
-import java.util.Random;
 
 public class TransactionThread extends Thread {
     private Wallet senderWallet;
@@ -21,13 +20,10 @@ public class TransactionThread extends Thread {
     public void run() {
         while(running) {
             try {
-                // Random delay to simulate transaction creation time
-                //Thread.sleep(new Random().nextInt(1000));
-    
                 // Create transaction
                 Transaction transaction = senderWallet.processTransaction(recipientKey, amount);
                 if(transaction != null) {
-                    System.out.println("Transaction created by " + Thread.currentThread().getName() + ": " + transaction);
+                    System.out.println("Transaction created by " + Thread.currentThread().getName() + ": " + transaction.getSignature());
                     break;
                 } else if(senderWallet.getWalletRunning()) {
                     // if(transaction == null && walletRunning == true) 

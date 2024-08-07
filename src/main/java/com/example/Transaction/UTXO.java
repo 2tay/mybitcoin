@@ -3,7 +3,6 @@ package com.example.Transaction;
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import java.util.UUID;
 
 import com.example.Pool.UTXOSet;
