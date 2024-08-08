@@ -8,6 +8,7 @@ release.properties
 
 # VS Code specific files
 .vscode/
+Logs/
 
 # Logs
 *.log

@@ -3,14 +3,14 @@ package com.example.Block;
 import java.util.UUID;
 
 import com.example.Transaction.Transaction;
-import com.example.miner.Miner;
+import com.example.miner.BlockMiner;
 
 public class Block {
     private String blockId;
     private Transaction transaction;
-    private Miner blockMiner;
+    private BlockMiner blockMiner;
 
-    public Block(Transaction transaction, Miner blockMiner) {
+    public Block(Transaction transaction, BlockMiner blockMiner) {
         this.blockId = UUID.randomUUID().toString();
         this.transaction = transaction;
         this.blockMiner = blockMiner;
@@ -24,7 +24,11 @@ public class Block {
         return transaction;
     }
 
-    public Miner getBlockMiner() {
+    public void deleteTransaction() {
+        transaction = null;
+    }
+
+    public BlockMiner getBlockMiner() {
         return blockMiner;
     }
 
