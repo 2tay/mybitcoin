@@ -4,8 +4,6 @@ import com.example.Transaction.Transaction;
 import com.example.miner.BlockMiner;
 import com.example.utils.KeyUtils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 public class Block {

@@ -3,7 +3,6 @@ package com.example.miner;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
