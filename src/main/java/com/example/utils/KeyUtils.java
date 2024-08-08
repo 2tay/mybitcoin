@@ -2,6 +2,8 @@ package com.example.utils;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
@@ -43,6 +45,22 @@ public class KeyUtils {
             return new String(decryptedBytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static String hashData(String dataToHash) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(dataToHash.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Couldn't create hash for block", e);
         }
     }
     
