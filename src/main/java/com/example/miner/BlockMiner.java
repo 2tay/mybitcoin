@@ -2,101 +2,170 @@ package com.example.miner;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionThread;
+import com.example.Transaction.UTXO;
+import com.example.Wallet.Wallet;
 import com.example.utils.Logger;
 import com.example.utils.TransactionUtils;
 
 public class BlockMiner extends Thread {
-    public String minerName;
-    private Block candidateBlock;
-    private boolean running = true;
-    private volatile boolean minningRound = false;
-    private static final int DIFFICULTY = 100; // Simplified difficulty for proof-of-work
+    public final String minerName;
+    private volatile Block candidateBlock;
+    private final AtomicBoolean running;
+    private static final int DIFFICULTY = 1000; // Configurable difficulty for proof-of-work
+    private static final long MINING_INTERVAL = 100; // 100ms interval between mining attempts
+    private final Random random;
 
     public BlockMiner(String name) {
-        minerName = name;
+        this.minerName = name;
+        this.running = new AtomicBoolean(true);
+        this.random = new Random();
     }
 
+    @Override
     public void run() {
-        while(running) {
-            List<Transaction> txPool = TransactionPool.getMemPool();
-
-            // Candidate Block already created
-            if(candidateBlock != null) {
-                // candidate block empty of mined Transactions OR set (candidateBlock = null)
-                checkBlockTx(txPool);
-            }
-
-            if(candidateBlock == null) {
-                createBlock(txPool);
-            }
-
-            while(minningRound) {
-                Logger.log(minerName + " Trying to solve Block's puzzle: " + candidateBlock.getBlockId());
-                if(solveMinningPuzzle()) {
-                    mineBlock(candidateBlock);
-                } else {
-                    System.out.println(minerName + " failed to solve puzzle");
-                }
-            }
-
-            // stop time re-render Mempool
+        while (running.get()) {
             try {
-                Thread.sleep(1000);
+                if (candidateBlock == null || isBlockchainUpdated()) {
+                    updateCandidateBlock();
+                }
+
+                if (candidateBlock != null) {
+                    boolean solved = solveMiningPuzzle();
+                    if (solved) {
+                        mineBlock(candidateBlock);
+                    }
+                }
+
+                Thread.sleep(MINING_INTERVAL);
             } catch (InterruptedException e) {
+                Logger.log(minerName + " was interrupted. Stopping mining operations.");
+                running.set(false);
+            } catch (Exception e) {
+                Logger.log(minerName + " encountered an error: " + e.getMessage());
                 e.printStackTrace();
             }
         }
     }
 
-    public void mineBlock(Block block) {
-        Logger.log(minerName + " Try to Mine");
-        if(TransactionUtils.verifyTransaction(block.geTransaction())) {
+    private boolean isBlockchainUpdated() {
+        return candidateBlock == null || !Blockchain.getLatestBlockId().equals(candidateBlock.getPreviousBlockId());
+    }
 
-            TransactionPool.removeTransaction(block.geTransaction());
+    private void updateCandidateBlock() {
+        List<Transaction> txPool = TransactionPool.getMemPool();
 
-            UTXOSet.removeConsumedUtxosTransaction(block.geTransaction());
-            UTXOSet.addUtxosTransaction(block.geTransaction());
-
-            Blockchain.addToBlockchain(block);
-            Logger.log(minerName + " Mined Block: " + block.getBlockId());
-
-            minningRound = false;
+        if (!txPool.isEmpty()) {
+            Transaction newTx = txPool.get(random.nextInt(txPool.size()));
+            String previousBlockId = Blockchain.getLatestBlockId();
+            candidateBlock = new Block(newTx, previousBlockId, this);
+            Logger.log(minerName + " Updated CandidateBlock: " + candidateBlock.getBlockId());
         } else {
-            Logger.log(minerName + " Block's Transaction not valid!");
-        }
-    }
-
-    public void stopMiner() {
-        running = false;
-    }
-
-    public void checkBlockTx(List<Transaction> txPool) {
-        // txpool doesnt contain candidateBlock's transaction -----------> Transaction in the block already mined
-        if(!txPool.contains(candidateBlock.geTransaction())) {
+            Logger.log(minerName + ": Transaction Pool is Empty. Waiting...");
             candidateBlock = null;
         }
     }
 
-    public void createBlock(List<Transaction> txPool) {
-        if(txPool.size() > 0) {
-            Transaction newTx = txPool.get(new Random().nextInt(txPool.size() - 1));
-            candidateBlock = new Block(newTx, this);
-            // After Candidate Block Creation
-            minningRound = true;
-        } else {
-            System.out.println("TxPool is empty! try later");
-        }
+    private void mineBlock(Block block) {
+        Logger.log(minerName + " Attempting to mine Block: " + block.getBlockId());
+        synchronized (Blockchain.class) {
+            if (isBlockchainUpdated()) {
+                Logger.log(minerName + ": Blockchain updated, abandoning current block.");
+                return;
+            }
 
+            if (TransactionUtils.verifyTransaction(block.getTransaction())) {
+                TransactionPool.removeTransaction(block.getTransaction());
+                UTXOSet.removeConsumedUtxosTransaction(block.getTransaction());
+                UTXOSet.addUtxosTransaction(block.getTransaction());
+                Blockchain.addToBlockchain(block);
+                Logger.log(minerName + " Successfully mined Block: " + block);
+                candidateBlock = null;  // Reset candidate block after successful mining
+            } else {
+                Logger.log(minerName + " Block's Transaction not valid!");
+            }
+        }
     }
 
-    private boolean solveMinningPuzzle() {
-        int nonce = new Random().nextInt(DIFFICULTY + 1);
-        return nonce == DIFFICULTY;
+    private boolean solveMiningPuzzle() {
+        // This is a simplified puzzle-solving mechanism.
+        // In a real implementation, this would involve calculating a hash that meets certain criteria.
+        return random.nextInt(DIFFICULTY) == 0;
+    }
+
+    public void stopMiner() {
+        running.set(false);
+    }
+
+    // Multiple Transactions Multiple Miners
+    public static void test2() {
+        // Wallets in the Network
+        Wallet w1 = new Wallet();
+        Wallet w2 = new Wallet();
+        Wallet w3 = new Wallet();
+
+        // Genisis utxos foreach Wallet
+        UTXO.genesisUtxo(w1, 50);
+        UTXO.genesisUtxo(w1, 30);
+        UTXO.genesisUtxo(w2, 10);
+        UTXO.genesisUtxo(w2, 100);
+        UTXO.genesisUtxo(w3, 90);
+        UTXO.genesisUtxo(w3, 10);
+
+        // Print each Wallet Balance first
+        System.out.println("w1 start balance: " + w1.getBalance());
+        System.out.println("w2 start balance: " + w2.getBalance());
+        System.out.println("w3 start balance: " + w3.getBalance());
+
+        // Create multiple transaction threads for w1 (WALLET1)
+        TransactionThread t0 = new TransactionThread(w1, w2.getPublicKey(), 20);
+        TransactionThread t1 = new TransactionThread(w1, w2.getPublicKey(), 5);
+        TransactionThread t2 = new TransactionThread(w1, w3.getPublicKey(), 5);
+
+        // for w2
+        TransactionThread t3 = new TransactionThread(w2, w1.getPublicKey(), 10);
+        TransactionThread t4 = new TransactionThread(w2, w3.getPublicKey(), 5);
+
+        // for w3 (WALLET2)
+        TransactionThread t5 = new TransactionThread(w3, w1.getPublicKey(), 50);
+
+        // start threads
+        t0.start();
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+
+        // Create and start multiple miners
+        BlockMiner miner1 = new BlockMiner("BlockMiner1");
+        BlockMiner miner2 = new BlockMiner("BlockMiner2");
+        BlockMiner miner3 = new BlockMiner("BlockMiner3");
+        BlockMiner miner4 = new BlockMiner("BlockMiner4");
+        BlockMiner miner5 = new BlockMiner("BlockMiner5");
+        
+        miner1.start();
+        miner2.start();
+        miner3.start();
+        miner4.start();
+        miner5.start();
+
+        List<Transaction> transactions = TransactionPool.getMemPool();
+        System.out.println("MemPool Size: " + transactions.size());
+        for(Transaction tx : transactions) {
+            System.out.println("TX : " + tx.getSignature());
+        }
+    }
+
+    public static void main(String[] args) {
+        test2();
     }
 }
