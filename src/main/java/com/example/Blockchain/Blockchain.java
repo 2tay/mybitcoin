@@ -40,6 +40,14 @@ public class Blockchain {
         return firstBlock;
     }
 
+    public static List<Block> getNewBlocks(Block block) {
+        int index = chain.indexOf(block);
+        if(index != -1) {
+            return new ArrayList<>(chain.subList(index, chain.size()));
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         System.out.println(chain.size());
     }

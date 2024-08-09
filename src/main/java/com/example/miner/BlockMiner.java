@@ -21,6 +21,8 @@ public class BlockMiner extends Thread {
     private final AtomicBoolean running;
     private static final int DIFFICULTY = 1000; // Configurable difficulty for proof-of-work
     private static final long MINING_INTERVAL = 100; // 100ms interval between mining attempts
+    private static final long TIMEOUT = 5000; // 5 seconds timeout for stopping the miner
+    private long lastTransactionTime;
     private final Random random;
 
     public BlockMiner(String name) {
@@ -38,10 +40,16 @@ public class BlockMiner extends Thread {
                 }
 
                 if (candidateBlock != null) {
+                    lastTransactionTime = System.currentTimeMillis();
                     boolean solved = solveMiningPuzzle();
                     if (solved) {
                         mineBlock(candidateBlock);
                     }
+                }
+
+                if (isTransactionPoolEmptyForTooLong()) {
+                    Logger.log(minerName + ": No transactions to mine. Stopping miner.");
+                    stopMiner();
                 }
 
                 Thread.sleep(MINING_INTERVAL);
@@ -104,6 +112,11 @@ public class BlockMiner extends Thread {
         running.set(false);
     }
 
+    private boolean isTransactionPoolEmptyForTooLong() {
+        return TransactionPool.getMemPool().isEmpty() && 
+               (System.currentTimeMillis() - lastTransactionTime) > TIMEOUT;
+    }
+
     // Multiple Transactions Multiple Miners
     public static void test2() {
         // Wallets in the Network
@@ -164,7 +177,48 @@ public class BlockMiner extends Thread {
         }
     }
 
+    public static void test3() {
+        Wallet w1 = new Wallet();
+        Wallet w2 = new Wallet();
+
+        UTXO.genesisUtxo(w1, 100);
+        UTXO.genesisUtxo(w2, 10);
+        UTXO.genesisUtxo(w2, 10);
+
+        TransactionThread t1 = new TransactionThread(w1, w2.getPublicKey(), 100);
+        TransactionThread t2 = new TransactionThread(w2, w1.getPublicKey(), 80);
+
+        t1.start();
+        t2.start();
+    
+        // Create and start multiple miners
+        BlockMiner miner1 = new BlockMiner("BlockMiner1");
+        BlockMiner miner2 = new BlockMiner("BlockMiner2");
+        BlockMiner miner3 = new BlockMiner("BlockMiner3");
+        BlockMiner miner4 = new BlockMiner("BlockMiner4");
+        BlockMiner miner5 = new BlockMiner("BlockMiner5");
+        
+        miner1.start();
+        miner2.start();
+        miner3.start();
+        miner4.start();
+        miner5.start();
+
+        try {
+            miner1.join();
+            miner2.join();
+            miner3.join();
+            miner4.join();
+            miner5.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("W1 BALANCE: " + w1.getBalance());
+        System.out.println("W2 BALANCE: " + w2.getBalance());
+    }
+
     public static void main(String[] args) {
-        test2();
+        test3();
     }
 }

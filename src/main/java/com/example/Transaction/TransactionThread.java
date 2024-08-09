@@ -1,25 +1,36 @@
 package com.example.Transaction;
 
+import com.example.Block.Block;
+import com.example.Blockchain.Blockchain;
 import com.example.Wallet.Wallet;
 
 import java.security.PublicKey;
+import java.util.List;
 
 public class TransactionThread extends Thread {
     private Wallet senderWallet;
     private PublicKey recipientKey;
     private int amount;
     private boolean running = true;
+    private Block latestBlock;
 
     public TransactionThread(Wallet senderWallet, PublicKey recipientKey, int amount) {
         this.senderWallet = senderWallet;
         this.recipientKey = recipientKey;
         this.amount = amount;
+        latestBlock = Blockchain.getLatestBlock();
     }
 
     @Override
     public void run() {
         while(running) {
             try {
+                // check if there is new blocks in blockchain
+                if(!checkLatestBlock()) {
+                    latestBlock = Blockchain.getLatestBlock();
+                    updateWalletPool();
+                }
+
                 // Create transaction
                 Transaction transaction = senderWallet.processTransaction(recipientKey, amount);
                 if(transaction != null) {
@@ -41,6 +52,37 @@ public class TransactionThread extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean checkLatestBlock() {
+        return Blockchain.getLatestBlock().equals(latestBlock);
+    }
+
+    public boolean updateWalletPool() {
+        // new blocks mined
+        List<Block> newBlocks = Blockchain.getNewBlocks(latestBlock);
+        if(newBlocks != null) 
+        {
+            for(Block block : newBlocks) 
+            {
+                if(senderWallet.getTxPool().getPoolTransactions().contains(block.getTransaction())) {
+                    // add mined transaction output's utxos
+                    //senderWallet.getUtxoPool().addOutputUtxos(block.getTransaction()); // no more need check next for loop
+                    // remove transaction from wallet proof
+                    senderWallet.getTxPool().removeFromPool(block.getTransaction());
+                }
+
+                // check if you have any outputs uder your publick key
+                for(TransactionOutput output : block.getTransaction().getOutputs()) {
+                    if(output.getpubKey().equals(senderWallet.getPublicKey())) {
+                        // you recieve money from someone
+                        senderWallet.getUtxoPool().addOutputUtxos(block.getTransaction()); // will also add your own trnasction outputs (your exchange)
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public static void test1() {

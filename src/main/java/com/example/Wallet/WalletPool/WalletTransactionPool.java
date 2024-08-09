@@ -8,6 +8,10 @@ import com.example.Transaction.Transaction;
 public class WalletTransactionPool {
     List<Transaction> waitingTransaction = new ArrayList<>();
 
+    public List<Transaction> getPoolTransactions() {
+        return waitingTransaction;
+    }
+
     public boolean addToPool(Transaction tx) {
         return waitingTransaction.add(tx);
     }
