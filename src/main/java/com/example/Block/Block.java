@@ -5,17 +5,21 @@ import com.example.miner.BlockMiner;
 import com.example.utils.KeyUtils;
 
 import java.time.Instant;
+import java.util.List;
 
 public class Block {
     private final String blockId;
     private final String previousBlockId;
     private final long timestamp;
-    private final Transaction transaction;
+    private final List<Transaction> transactions;
     private final BlockMiner miner;
     private int nonce;
 
-    public Block(Transaction transaction, String previousBlockId, BlockMiner miner) {
-        this.transaction = transaction;
+    public Block(List<Transaction> transactions, String previousBlockId, BlockMiner miner) {
+        if(transactions == null || transactions.isEmpty() || miner == null) {
+            throw new IllegalArgumentException("Block cannot have null transactions or miner!");
+        }
+        this.transactions = transactions;
         this.previousBlockId = previousBlockId;
         this.miner = miner;
         this.timestamp = Instant.now().getEpochSecond();
@@ -31,8 +35,8 @@ public class Block {
         return previousBlockId;
     }
 
-    public Transaction getTransaction() {
-        return transaction;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     public BlockMiner getMiner() {
@@ -52,7 +56,7 @@ public class Block {
     }
 
     private String calculateBlockId() {
-        String dataToHash = previousBlockId + timestamp + transaction.toString() + miner.toString() + nonce;
+        String dataToHash = previousBlockId + timestamp + transactions.toString() + miner.toString() + nonce;
         return KeyUtils.hashData(dataToHash);
     }
 
@@ -62,7 +66,7 @@ public class Block {
                 "blockId='" + blockId + '\'' +
                 ", previousBlockId='" + previousBlockId + '\'' +
                 ", timestamp=" + timestamp +
-                ", transaction=" + transaction +
+                ", transactions=" + transactions +
                 ", miner=" + miner.minerName +
                 ", nonce=" + nonce +
                 '}';

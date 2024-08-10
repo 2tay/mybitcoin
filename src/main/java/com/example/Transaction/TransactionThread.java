@@ -65,18 +65,22 @@ public class TransactionThread extends Thread {
         {
             for(Block block : newBlocks) 
             {
-                if(senderWallet.getTxPool().getPoolTransactions().contains(block.getTransaction())) {
-                    // add mined transaction output's utxos
-                    //senderWallet.getUtxoPool().addOutputUtxos(block.getTransaction()); // no more need check next for loop
-                    // remove transaction from wallet proof
-                    senderWallet.getTxPool().removeFromPool(block.getTransaction());
+                for(Transaction tx : block.getTransactions()) {
+                    if(senderWallet.getTxPool().getPoolTransactions().contains(tx)) {
+                        // add mined transaction output's utxos
+                        //senderWallet.getUtxoPool().addOutputUtxos(tx); // no more need check next for loop
+                        // remove transaction from wallet proof
+                        senderWallet.getTxPool().removeFromPool(tx);
+                    }
+    
                 }
-
                 // check if you have any outputs uder your publick key
-                for(TransactionOutput output : block.getTransaction().getOutputs()) {
-                    if(output.getpubKey().equals(senderWallet.getPublicKey())) {
-                        // you recieve money from someone
-                        senderWallet.getUtxoPool().addOutputUtxos(block.getTransaction()); // will also add your own trnasction outputs (your exchange)
+                for(Transaction tx : block.getTransactions()) {
+                    for(TransactionOutput output : tx.getOutputs()) {
+                        if(output.getpubKey().equals(senderWallet.getPublicKey())) {
+                            // you recieve money from someone
+                            senderWallet.getUtxoPool().addOutputUtxos(tx); // will also add your own trnasction outputs (your exchange)
+                        }
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.Blockchain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.example.Block.Block;
 import com.example.Pool.TransactionPool;
@@ -35,7 +36,7 @@ public class Blockchain {
         BlockMiner miner = new BlockMiner("Miner0");
         UTXO.genesisUtxo(satoshiWallet, 10);
         Transaction tx = satoshiWallet.processTransaction(satoshiWallet.getPublicKey(), 10);
-        Block firstBlock = new Block(tx, null, miner);
+        Block firstBlock = new Block(new ArrayList<>(Arrays.asList(tx)), null, miner);
         TransactionPool.removeTransaction(tx);
         return firstBlock;
     }
