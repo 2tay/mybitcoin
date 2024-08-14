@@ -1,51 +1,38 @@
 package com.example.Networking;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.Scanner;
 
 public class Server {
-
     private int port;
-    private String ipAddress;
 
-    public void startServer() throws IOException {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Enter port: ");
-            port = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+    public Server(int port) {
+        this.port = port;
+    }
 
-            ipAddress = Inet4Address.getLocalHost().getHostAddress();
-            System.out.println("Server starting at IP: " + ipAddress + " on port: " + port);
-
-            try (ServerSocket serverSocket = new ServerSocket(port)) {
-                while (true) {
-                    try {
-                        Socket socket = serverSocket.accept();
-                        new ClientHandler(socket).start();
-                    } catch (IOException e) {
-                        System.err.println("Failed to accept client socket.");
-                        e.printStackTrace();
-                    }
-                }
+    public void startServer() {
+        try (ServerSocket serverSocket = new ServerSocket(port))
+        {
+            System.out.println("Server started on port: " + port);
+            while(true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("New Client connected " + socket.getInetAddress());
+                new ClientHandler(socket).start();
             }
+        } catch (IOException e) {
+            System.err.println("Failed to start Server");
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        Server server = new Server();
 
-        try {
-            server.startServer();
-        } catch (UnknownHostException e) {
-            System.err.println("Failed to get server IP address.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.err.println("Failed to start server at IP: " + server.ipAddress + " Port: " + server.port);
-            e.printStackTrace();
-        }
+    public static void testStartServer() {
+        Server server = new Server(2000);
+        server.startServer();
+    }
+
+    public static void main(String[] args) {
+        testStartServer();
     }
 }
