@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Client {
     
-    public void connectToNode(String host, int port) {
+    public void connectToServer(String host, int port) {
         try(Socket socket = new Socket(host, port))
         {
             System.out.println("Connected to server: " + host + " port: " + port);
@@ -46,15 +46,17 @@ public class Client {
     }
 
 
+    // TESTING FUNCTIONS
     public static void testConnectToNode() {
         Client client = new Client();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter port server to connect: ");
         int port = scanner.nextInt();
         scanner.nextLine();
-        client.connectToNode("localhost", port);
+        client.connectToServer("localhost", port);
     }
 
+    // MAIN FUNCTION
     public static void main(String[] args) {
         testConnectToNode();
     }

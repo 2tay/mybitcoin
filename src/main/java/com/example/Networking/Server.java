@@ -27,11 +27,13 @@ public class Server {
     }
 
 
+    // TESTING FUNCTIONS
     public static void testStartServer() {
         Server server = new Server(2000);
         server.startServer();
     }
 
+    // MAIN FUNCTION
     public static void main(String[] args) {
         testStartServer();
     }
