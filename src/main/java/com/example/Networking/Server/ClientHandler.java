@@ -1,4 +1,4 @@
-package com.example.Networking;
+package com.example.Networking.Server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+
+import com.example.Networking.Client.Message;
 
 public class ClientHandler extends Thread {
     private Socket socket;
@@ -40,7 +42,7 @@ public class ClientHandler extends Thread {
             Message message = (Message) in.readObject();
     
             // Log the received message details
-            System.out.println("Received --> messageId: " + message.getId() + ", body: " + message.getBody());
+            System.out.println("Received --> request: " + message);
         } catch (ClassNotFoundException e) {
             System.err.println("Failed to cast the received object to Message class.");
             e.printStackTrace();
