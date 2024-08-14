@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Client {
     
-    public void connectToServer(String host, int port) {
+    public void connectToServer(String host, int port, String message) {
         try(Socket socket = new Socket(host, port))
         {
             System.out.println("Connected to server: " + host + " port: " + port);
@@ -21,8 +21,6 @@ public class Client {
                 Scanner scanner = new Scanner(System.in))
             {
                 // send message to Node
-                System.out.println("Enter message: ");
-                String message = scanner.nextLine();
                 out.println(message);
 
                 // receive response
@@ -61,7 +59,7 @@ public class Client {
     }
 
 
-    // TESTING FUNCTIONS
+    // --------------->     TESTING FUNCTIONS   <------------------------------
     public static void testConnectToNode() {
         Client client = new Client();
         Scanner scanner = new Scanner(System.in);
@@ -70,7 +68,7 @@ public class Client {
         int port = scanner.nextInt();
         scanner.nextLine();
 
-        client.connectToServer("localhost", port);
+        client.connectToServer("localhost", port, "hello world!");
         scanner.close();
     }
 
