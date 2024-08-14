@@ -19,20 +19,25 @@ public class Node {
         new Thread(() -> client.connectToServer(peerHost, peerPort)).start();
     }
 
+    public void sendObjectToPeer(Object o, String peerHost, int peerPort) {
+        new Thread(() -> client.sendSerializObject(o, peerHost, peerPort)).start();
+    }
+
 
     // TESTING FUNCTIONS
-    public static void test1() {
+    public static void testStartNodeServer() {
         Node miner1 = new Node(2000);
         miner1.startNode();
     }
 
-    public static void test2() {
+    public static void testSendObject() {
         Node wallet1 = new Node(2005);
-        wallet1.connectToPeer("localhost", 2000);
+        Message tx0se = new Message("tx0");
+        wallet1.sendObjectToPeer(tx0se, "localhost", 2000);
     }
 
     public static void main(String[] args) {
-        test1();
-        // test2(); // in another terminal 
+        //testStartNodeServer();
+        testSendObject(); 
     }
 }
