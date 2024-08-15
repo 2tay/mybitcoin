@@ -1,9 +1,10 @@
 package com.example.Transaction;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.UUID;
 
-public class TransactionInput {
+public class TransactionInput implements Serializable {
     private String txInputId;
     private String prevTxId;
     private int index;

@@ -4,12 +4,16 @@ import com.example.Networking.Client.Message;
 
 
 public class HandleRequest {
-    private ResponseHelper helper;
+    private HandleRequestHelper helper;
     private Response response;
 
     public HandleRequest(Message message) {
-        helper = new ResponseHelper(message);
+        helper = new HandleRequestHelper(message);
         response = handleRequestMessage();
+    }
+
+    public Response getResponse() {
+        return response;
     }
 
     public Response handleRequestMessage() {

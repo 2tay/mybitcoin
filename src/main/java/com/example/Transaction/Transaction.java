@@ -1,11 +1,12 @@
 package com.example.Transaction;
 
+import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Transaction {
+public class Transaction implements Serializable {
     private List<TransactionInput> inputs;
     private List<TransactionOutput> outputs;
     private PublicKey publicKey;

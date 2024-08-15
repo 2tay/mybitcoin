@@ -9,10 +9,10 @@ import com.example.Networking.Client.Message;
 import com.example.Pool.TransactionPool;
 import com.example.Transaction.Transaction;
 
-public class ResponseHelper {
+public class HandleRequestHelper {
     private Message requestMessage;
 
-    public ResponseHelper(Message msg) {
+    public HandleRequestHelper(Message msg) {
         requestMessage = msg;
     }
 

@@ -1,7 +1,5 @@
 package com.example.Networking.Client;
 
-import java.security.PublicKey;
-
 import com.example.Block.Block;
 import com.example.Transaction.Transaction;
 
@@ -30,11 +28,6 @@ public class MessageHelper {
     }
 
     // Transaction
-    public static Message msgGetTransaction(PublicKey pubkey) {
-        Message message = new Message("get", "transaction", pubkey); // Msg to Get transaction by pubkey
-        return message;
-    }
-
     public static Message msgPostTransaction(Transaction tx) {
         Message message = new Message("post", "transaction", tx);
         return message;

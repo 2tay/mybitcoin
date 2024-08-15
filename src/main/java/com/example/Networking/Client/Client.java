@@ -1,18 +1,31 @@
 package com.example.Networking.Client;
 
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Scanner;
+
+import com.example.Networking.Server.Response;
 
 public class Client {
     
     // Send Serialized object to node
     public void sendSerializObject(Object o, String host, int port) {
         try (Socket socket = new Socket(host, port);
-            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) 
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream()))
         {
+            // Serialize message and send
             out.writeObject(o);
             System.out.println(o.toString() + "Sent to server Successfully");
+
+            // receive and Deserialize Response
+            Response response = (Response) in.readObject();
+            if(response != null) {
+                System.out.println(response.toString());
+            } else{
+                System.out.println("Response is null");
+            }
         } 
         catch (Exception e) {
             System.err.println("Failed to sendSerializeObject to node");

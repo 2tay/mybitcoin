@@ -1,5 +1,6 @@
 package com.example.miner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ import com.example.Wallet.Wallet;
 import com.example.utils.Logger;
 import com.example.utils.TransactionUtils;
 
-public class BlockMiner extends Thread {
+public class BlockMiner extends Thread implements Serializable {
     public final String minerName;
     private volatile Block candidateBlock;
     private final AtomicBoolean running;
