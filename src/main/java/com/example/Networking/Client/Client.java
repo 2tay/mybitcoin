@@ -10,14 +10,14 @@ import com.example.Networking.Server.Response;
 public class Client {
     
     // Send Serialized object to node
-    public void sendSerializObject(Object o, String host, int port) {
+    public void sendSerializedMessage(Message message, String host, int port) {
         try (Socket socket = new Socket(host, port);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream()))
         {
             // Serialize message and send
-            out.writeObject(o);
-            System.out.println(o.toString() + "Sent to server Successfully");
+            out.writeObject(message);
+            System.out.println(message.toString() + "Sent to server Successfully");
 
             // receive and Deserialize Response
             Response response = (Response) in.readObject();
@@ -45,7 +45,7 @@ public class Client {
         scanner.nextLine();
 
         Message msg = MessageHelper.msgGetBlockchain();
-        client.sendSerializObject(msg, "localhost", port);
+        client.sendSerializedMessage(msg, "localhost", port);
 
         scanner.close();
     }

@@ -1,8 +1,10 @@
-package com.example.Transaction;
+package com.example.Wallet;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
-import com.example.Wallet.Wallet;
+import com.example.Transaction.Transaction;
+import com.example.Transaction.TransactionOutput;
+import com.example.Transaction.UTXO;
 
 import java.security.PublicKey;
 import java.util.List;
@@ -13,6 +15,7 @@ public class TransactionThread extends Thread {
     private int amount;
     private boolean running = true;
     private Block latestBlock;
+    public Transaction transactionCreated;
 
     public TransactionThread(Wallet senderWallet, PublicKey recipientKey, int amount) {
         this.senderWallet = senderWallet;
@@ -35,6 +38,7 @@ public class TransactionThread extends Thread {
                 Transaction transaction = senderWallet.processTransaction(recipientKey, amount);
                 if(transaction != null) {
                     System.out.println("Transaction created by " + Thread.currentThread().getName() + ": " + transaction.getSignature());
+                    transactionCreated = transaction;
                     break;
                 } else if(senderWallet.getWalletRunning()) {
                     // if(transaction == null && walletRunning == true) 
