@@ -15,13 +15,17 @@ public class TransactionThread extends Thread {
     private int amount;
     private boolean running = true;
     private Block latestBlock;
-    public Transaction transactionCreated;
+    private Transaction transactionCreated;
 
     public TransactionThread(Wallet senderWallet, PublicKey recipientKey, int amount) {
         this.senderWallet = senderWallet;
         this.recipientKey = recipientKey;
         this.amount = amount;
         latestBlock = Blockchain.getLatestBlock();
+    }
+
+    public Transaction getTransaction() {
+        return transactionCreated;
     }
 
     @Override

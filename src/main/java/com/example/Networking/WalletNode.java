@@ -25,7 +25,7 @@ public class WalletNode extends Node {
             e.printStackTrace();
         }
 
-        return transactionCreator.transactionCreated;
+        return transactionCreator.getTransaction();
     }
 
     public void BroadcastTxToPeer(Transaction tx, Message message, String peerHost, int peerPort) {
