@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.example.Transaction.Transaction;
-import com.example.Wallet.Wallet;
 import com.example.utils.TransactionUtils;
 
 public class TransactionPool {

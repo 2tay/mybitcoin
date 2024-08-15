@@ -18,6 +18,10 @@ public class Blockchain {
         chain.add(genisisBlock);
     }
 
+    public static List<Block> getBlockchain() {
+        return new ArrayList<>(chain);
+    }
+
     public static synchronized void addToBlockchain(Block block) {
         chain.add(block);
     }

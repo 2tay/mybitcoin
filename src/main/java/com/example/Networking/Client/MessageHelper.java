@@ -8,8 +8,8 @@ import com.example.Transaction.Transaction;
 public class MessageHelper {
 
     // BLOCK Messages
-    public static Message msgGetLastBlock(Block myLastBlock) {
-        Message message = new Message("get", "block", myLastBlock);
+    public static Message msgGetLastBlock() {
+        Message message = new Message("get", "block", null);
         return message;
     }
 
