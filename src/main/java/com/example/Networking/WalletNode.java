@@ -7,8 +7,10 @@ import com.example.Transaction.Transaction;
 import com.example.Wallet.TransactionThread;
 import com.example.Wallet.Wallet;
 
+
 public class WalletNode extends Node {
-    private Wallet wallet;
+    // TODO : set to protected again after test
+    public Wallet wallet;
 
     public WalletNode(int walletServerPort) {
         super(walletServerPort);
@@ -36,4 +38,5 @@ public class WalletNode extends Node {
         }
         System.out.println("transaction is NULL");
     }
+
 }

@@ -27,7 +27,7 @@ public class HandleRequestHelper {
             return new Response(Response.Status.OK, Blockchain.getLatestBlockId());
         } 
 
-        return new Response(Response.Status.NOT_FOUND, null);
+        return new Response(Response.Status.NOT_FOUND);
     }
 
     public Response handleGetBlocksFrom() {
@@ -43,10 +43,10 @@ public class HandleRequestHelper {
                 return new Response(Response.Status.OK, newClientBlocs);
             }
             // newBlocks == null
-            return new Response(Response.Status.NOT_FOUND, null);
+            return new Response(Response.Status.NOT_FOUND);
         }
 
-        return new Response(Response.Status.BAD_REQUEST, null);
+        return new Response(Response.Status.BAD_REQUEST);
     }
 
     public Response handlePostBlock() {
@@ -57,7 +57,7 @@ public class HandleRequestHelper {
             Blockchain.addToBlockchain(minedBlock);
             return new Response(Response.Status.OK, minedBlock);
         }
-        return new Response(Response.Status.BAD_REQUEST, null);
+        return new Response(Response.Status.BAD_REQUEST);
     }
 
     public Response handleGetBlockchain() {
@@ -67,7 +67,7 @@ public class HandleRequestHelper {
             return new Response(Response.Status.OK, blockchain);
         }
         
-        return new Response(Response.Status.NOT_FOUND, null);
+        return new Response(Response.Status.NOT_FOUND);
     }
 
     public Response handleGetTransaction() {
@@ -77,7 +77,7 @@ public class HandleRequestHelper {
             // TODO ; LOGIC HERE
             return new Response(Response.Status.OK, pubkey);
         }
-        return new Response(Response.Status.NOT_FOUND, null);
+        return new Response(Response.Status.NOT_FOUND);
     }
 
     public Response handlePostTransaction() 
@@ -90,10 +90,10 @@ public class HandleRequestHelper {
                 return new Response(Response.Status.OK, tx);
             }
 
-            return new Response(Response.Status.UNAUTHORIZED, tx);
+            return new Response(Response.Status.UNAUTHORIZED);
         }
 
-        return new Response(Response.Status.BAD_REQUEST, null);
+        return new Response(Response.Status.BAD_REQUEST);
     }
 
 }

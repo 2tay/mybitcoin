@@ -17,14 +17,14 @@ public class Client {
         {
             // Serialize message and send
             out.writeObject(message);
-            System.out.println(message.toString() + "Sent to server Successfully");
+            System.out.println(message.toString() + " Sent to server Successfully");
 
             // receive and Deserialize Response
             Response response = (Response) in.readObject();
-            if(response != null) {
+            if(response.getStatus() == Response.Status.OK) {
                 System.out.println(response.toString());
             } else{
-                System.out.println("Response is null");
+                System.out.println("request failed: " + response.toString());
             }
         } 
         catch (Exception e) {

@@ -38,7 +38,7 @@ public class HandleRequest {
             return helper.handlePostTransaction();
         }
 
-        return new Response(Response.Status.BAD_REQUEST, null);
+        return new Response(Response.Status.BAD_REQUEST, "error: invalid syntax request");
     }
 
 }

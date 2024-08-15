@@ -31,6 +31,19 @@ public class Response implements Serializable {
         this.content = content;
     }
 
+    public Response(Status status) {
+        this.status = status;
+        if(status == Status.NOT_FOUND) {
+            content = "404 Not Found: The server cannot find the requested resource.";
+        }
+        else if( status == Status.BAD_REQUEST) {
+            content = "400 Bad Request: The server could not understand the request due to invalid syntax";
+        }
+        else if(status == Status.UNAUTHORIZED) {
+            content = "401 Unauthorized: The client must authenticate itself to get the requested response";
+        }
+    }
+
     public Status getStatus() {
         return status;
     }

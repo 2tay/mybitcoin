@@ -9,21 +9,21 @@ public class Node {
     protected Server server;
     protected Client client;
 
-    protected Node(int serverPort) {
+    public Node(int serverPort) {
         this.server = new Server(serverPort);
         this.client = new Client();
     }
 
-    protected void startNodeServer() {
+    public void startNodeServer() {
         // start server in a new Thread
         new Thread(() -> server.startServer()).start();
     }
 
-    protected void stopNodeServer() {
+    public void stopNodeServer() {
         server.stopServer(); 
     }
 
-    protected void sendMessageToPeer(Message message, String peerHost, int peerPort) {
+    public void sendMessageToPeer(Message message, String peerHost, int peerPort) {
         new Thread(() -> client.sendSerializedMessage(message, peerHost, peerPort)).start();
     }
 
