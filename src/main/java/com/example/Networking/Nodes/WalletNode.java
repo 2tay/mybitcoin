@@ -1,4 +1,4 @@
-package com.example.Networking;
+package com.example.Networking.Nodes;
 
 import java.security.PublicKey;
 

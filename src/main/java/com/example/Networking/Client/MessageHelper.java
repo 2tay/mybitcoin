@@ -5,7 +5,7 @@ import com.example.Transaction.Transaction;
 
 public class MessageHelper {
 
-    // BLOCK Messages
+    // Block 
     public static Message msgGetLastBlock() {
         Message message = new Message("get", "block", null);
         return message;
@@ -32,5 +32,18 @@ public class MessageHelper {
         Message message = new Message("post", "transaction", tx);
         return message;
     }
+
+    // Nodes : (Nodes in the network)
+    public static Message msgGetAllNodes() {
+        Message message = new Message("get", "nodes", null);
+        return message;
+    }
+
+    public static Message msgPostNode(String nodeHost, String nodePort) {
+        String nodeInfos = nodeHost + ":" + nodePort;
+        Message message = new Message("post", "node", nodeInfos);
+        return message;
+    }
+
     
 }

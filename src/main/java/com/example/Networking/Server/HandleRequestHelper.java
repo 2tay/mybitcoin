@@ -1,11 +1,11 @@
 package com.example.Networking.Server;
 
-import java.security.PublicKey;
 import java.util.List;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
 import com.example.Networking.Client.Message;
+import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
 import com.example.Transaction.Transaction;
 
@@ -70,16 +70,6 @@ public class HandleRequestHelper {
         return new Response(Response.Status.NOT_FOUND);
     }
 
-    public Response handleGetTransaction() {
-        if(requestMessage.getArgument() instanceof PublicKey)
-        {
-            PublicKey pubkey = (PublicKey) requestMessage.getArgument();
-            // TODO ; LOGIC HERE
-            return new Response(Response.Status.OK, pubkey);
-        }
-        return new Response(Response.Status.NOT_FOUND);
-    }
-
     public Response handlePostTransaction() 
     {
         if(requestMessage.getArgument() instanceof Transaction)
@@ -95,5 +85,27 @@ public class HandleRequestHelper {
 
         return new Response(Response.Status.BAD_REQUEST);
     }
+
+    public Response handleGetAllNodes() {
+        List<String> peerNodes = Node.getAllNodes();
+        if(!peerNodes.isEmpty()) {
+            return new Response(Response.Status.OK, peerNodes);
+        }
+        
+        return new Response(Response.Status.NOT_FOUND);
+    }
+
+    public Response handlePostNode() {
+        if(requestMessage.getArgument() instanceof String) {
+            String nodeInfos = (String) requestMessage.getArgument();
+
+            Node.addNode(nodeInfos);
+
+            return new Response(Response.Status.OK, nodeInfos);
+        }
+
+        return new Response(Response.Status.BAD_REQUEST);
+    }
+
 
 }

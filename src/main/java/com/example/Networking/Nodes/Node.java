@@ -1,4 +1,7 @@
-package com.example.Networking;
+package com.example.Networking.Nodes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.Networking.Client.Client;
 import com.example.Networking.Client.Message;
@@ -8,6 +11,7 @@ import com.example.Networking.Server.Server;
 public class Node {
     protected Server server;
     protected Client client;
+    protected static List<String> peerNodes = new ArrayList<>();
 
     public Node(int serverPort) {
         this.server = new Server(serverPort);
@@ -27,6 +31,13 @@ public class Node {
         new Thread(() -> client.sendSerializedMessage(message, peerHost, peerPort)).start();
     }
 
+    public static List<String> getAllNodes() {
+        return new ArrayList<>(peerNodes);
+    }
+
+    public static void addNode(String nodeInfos) {
+        peerNodes.add(nodeInfos);
+    }
 
     // -------------------->    TESTING FUNCTIONS    <-----------------------------------------
     // Start Node on port 2000

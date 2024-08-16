@@ -37,6 +37,14 @@ public class HandleRequest {
         {
             return helper.handlePostTransaction();
         }
+        else if(helper.requestChoice("get", "nodes"))
+        {
+            return helper.handleGetAllNodes();
+        }
+        else if(helper.requestChoice("post", "node"))
+        {
+            return helper.handlePostNode();
+        }
 
         return new Response(Response.Status.BAD_REQUEST, "error: invalid syntax request");
     }

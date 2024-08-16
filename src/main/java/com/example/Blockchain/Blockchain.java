@@ -13,10 +13,10 @@ import com.example.miner.BlockMiner;
 public class Blockchain {
     private static final List<Block> chain = new ArrayList<>();
 
-    static {
+    /*static {
         Block genisisBlock = genisisBlock();
         chain.add(genisisBlock);
-    }
+    }*/
 
     public static List<Block> getBlockchain() {
         return new ArrayList<>(chain);
@@ -35,7 +35,7 @@ public class Blockchain {
         return latestBlock != null ? latestBlock.getBlockId() : null;
     }
 
-    public static Block genisisBlock() {
+    /*public static Block genisisBlock() {
         Wallet satoshiWallet = new Wallet();
         BlockMiner miner = new BlockMiner("Miner0");
         UTXO.genesisUtxo(satoshiWallet, 10);
@@ -43,7 +43,7 @@ public class Blockchain {
         Block firstBlock = new Block(new ArrayList<>(Arrays.asList(tx)), null, miner);
         TransactionPool.removeTransaction(tx);
         return firstBlock;
-    }
+    }*/
 
     public static List<Block> getNewBlocks(Block block) {
         int index = chain.indexOf(block);
