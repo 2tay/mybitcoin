@@ -1,14 +1,8 @@
 package com.example.Blockchain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import com.example.Block.Block;
-import com.example.Pool.TransactionPool;
-import com.example.Transaction.Transaction;
-import com.example.Transaction.UTXO;
-import com.example.Wallet.Wallet;
-import com.example.miner.BlockMiner;
 
 public class Blockchain {
     private static final List<Block> chain = new ArrayList<>();

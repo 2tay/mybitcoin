@@ -33,7 +33,7 @@ public class WalletNode extends Node {
     public void BroadcastTxToPeer(Transaction tx, Message message, String peerHost, int peerPort) {
         if(tx != null) {
             System.out.println("Transaction created succefully: " + tx);
-            sendMessageToPeer(message, peerHost, peerPort);
+            client.sendSerializedMessage(message, peerHost, peerPort);
             System.out.println(tx + " Broadcast Succefully to " + peerHost + ":" + peerPort);
         }
         System.out.println("transaction is NULL");

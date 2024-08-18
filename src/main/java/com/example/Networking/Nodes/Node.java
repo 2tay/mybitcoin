@@ -27,10 +27,6 @@ public class Node {
         server.stopServer(); 
     }
 
-    public void sendMessageToPeer(Message message, String peerHost, int peerPort) {
-        new Thread(() -> client.sendSerializedMessage(message, peerHost, peerPort)).start();
-    }
-
     public static List<String> getAllNodes() {
         return new ArrayList<>(peerNodes);
     }
@@ -50,7 +46,7 @@ public class Node {
     public static void testSendObject() {
         Node wallet1 = new Node(2005);
         Message tx0se = MessageHelper.msgGetBlockchain();
-        wallet1.sendMessageToPeer(tx0se, "localhost", 2000);
+        wallet1.client.sendSerializedMessage(tx0se, "localhost", 2000);
     }
 
     public static void main(String[] args) {

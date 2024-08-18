@@ -10,7 +10,7 @@ import com.example.Networking.Server.Response;
 public class Client {
     
     // Send Serialized object to node
-    public void sendSerializedMessage(Message message, String host, int port) {
+    public Response sendSerializedMessage(Message message, String host, int port) {
         try (Socket socket = new Socket(host, port);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream()))
@@ -26,10 +26,12 @@ public class Client {
             } else{
                 System.out.println("request failed: " + response.toString());
             }
+            return response;
         } 
         catch (Exception e) {
             System.err.println("Failed to sendSerializeObject to node");
             e.printStackTrace();
+            return null;
         }
     }
 
