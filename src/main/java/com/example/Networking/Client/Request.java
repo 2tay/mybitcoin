@@ -20,7 +20,7 @@ public class Request implements Serializable {
     }
 
     public Object getArgument() {
-        return getArgument();
+        return argument;
     }
 
     @Override
