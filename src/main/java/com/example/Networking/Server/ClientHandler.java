@@ -5,7 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import com.example.Networking.Client.Message;
+import com.example.Networking.Client.Request;
+
 
 public class ClientHandler extends Thread {
     private Socket socket;
@@ -23,32 +24,31 @@ public class ClientHandler extends Thread {
         try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) {
             // Read the object from the input stream
-            Message message = (Message) in.readObject();
+            Request req = (Request) in.readObject();
     
-            // Log the received message details
-            System.out.println("Received --> request: " + message);
+            // Log the received req details
+            System.out.println("Received --> request: " + req);
 
             // Response to Client
             // Handle NullPOinter first before Response
             Response response;
-            if (message != null) {
-                HandleRequest request = new HandleRequest(message);
-                response = request.getResponse();
+            if (req != null) {
+                response = new HandleRequest(req.getMethod(), req.getArgument()).handleRequest();
             } else {
-                response = new Response(Response.Status.BAD_REQUEST, "invalid request: message is null");
+                response = new Response(Response.Status.BAD_REQUEST, "invalid request: req is null");
             }
             out.writeObject(response);
             System.out.println(response.toString() + "Sent to Client Successfully");
 
 
         } catch (ClassNotFoundException e) {
-            System.err.println("Failed to cast the received object to Message class.");
+            System.err.println("Failed to cast the received object to Request class.");
             e.printStackTrace();
         } catch (IOException e) {
             System.err.println("Failed to read object from the input stream.");
             e.printStackTrace();
         } catch (Exception e) {
-            System.err.println("An unexpected error occurred while handling the object message.");
+            System.err.println("An unexpected error occurred while handling the object req.");
             e.printStackTrace();
         } finally {
             try {
@@ -62,10 +62,5 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public void handleMessage(Message message) {
-        if(message == null) {
-
-        }
-    }
     
 }
