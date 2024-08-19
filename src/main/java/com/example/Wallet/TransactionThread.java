@@ -2,6 +2,9 @@ package com.example.Wallet;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
+import com.example.Networking.Client.Request;
+import com.example.Networking.Client.RequestHelper;
+import com.example.Networking.Nodes.Node;
 import com.example.Transaction.Transaction;
 import com.example.Transaction.TransactionOutput;
 import com.example.Transaction.UTXO;
@@ -43,6 +46,9 @@ public class TransactionThread extends Thread {
                 if(transaction != null) {
                     System.out.println("Transaction created by " + Thread.currentThread().getName() + ": " + transaction.getSignature());
                     transactionCreated = transaction;
+                    // Broadcast Transaction to Network
+                    Request req = RequestHelper.postTx(transaction);
+                    Node.sendReqToAllNetwork(req);
                     break;
                 } else if(senderWallet.getWalletRunning()) {
                     // if(transaction == null && walletRunning == true) 
