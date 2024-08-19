@@ -3,10 +3,15 @@ package com.example.Networking.Nodes;
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.example.Block.Block;
+import com.example.Blockchain.Blockchain;
 import com.example.Networking.Client.Client;
 import com.example.Networking.Client.Request;
+import com.example.Networking.Client.RequestHelper;
+import com.example.Networking.Server.Response;
 import com.example.Networking.Server.Server;
 
 public class Node {
@@ -34,6 +39,39 @@ public class Node {
         if (nodes != null) {
             networkNodes.addAll(nodes);
         }
+
+        startupBlockchain();
+    }
+
+    public void startupBlockchain() {
+        // Request the blockchain and add blocks to the blockchain
+        Request req = RequestHelper.getBlockchain();
+        Response response = client.sendSerializedMessage(req, "localhost", 2000);
+
+        // Check if the response is valid and the content is of the expected type
+        if (response != null && response.getStatus() == Response.Status.OK) {
+            Object content = response.getContent();
+            if (content instanceof List<?>) {
+                List<?> contentList = (List<?>) content;
+                
+                // Ensure that the content list contains Block objects
+                if (!contentList.isEmpty() && contentList.get(0) instanceof Block) {
+                    List<Block> chain = (List<Block>) contentList;
+                    
+                    // Add each block to the blockchain
+                    for (Block block : chain) {
+                        Blockchain.addToBlockchain(block);
+                    }
+                } else {
+                    System.err.println("Unexpected content type in the list.");
+                }
+            } else {
+                System.err.println("Unexpected response content type.");
+            }
+        } else {
+            System.err.println("Failed to retrieve blockchain or invalid response.");
+        }
+
     }
 
     public synchronized static void addToNetworkNodes(String nodeInfos) {

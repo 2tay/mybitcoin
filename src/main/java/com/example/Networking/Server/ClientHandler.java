@@ -5,7 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import com.example.Block.Block;
 import com.example.Networking.Client.Request;
+import com.example.Networking.Client.RequestHelper;
+import com.example.Networking.Nodes.MainServer;
 
 
 public class ClientHandler extends Thread {
@@ -34,6 +37,20 @@ public class ClientHandler extends Thread {
             Response response;
             if (req != null) {
                 response = new HandleRequest(req.getMethod(), req.getArgument()).handleRequest();
+
+                // Thread Mainserver Send New MIned Block to All network nodes
+                new Thread(() -> {
+                    if(req.getMethod().equals("postBlock") && req.getArgument() instanceof Block) {
+                        Block minedBlock = (Block) req.getArgument();
+                        Request mainServerRequest = RequestHelper.postBlock(minedBlock);
+                        for(String nodeinfos : MainServer.networkNodes) {
+                            String[] info = nodeinfos.split(":");
+                            MainServer.client.sendSerializedMessage(mainServerRequest, info[0], Integer.parseInt(info[1]));
+                        }
+                    }
+                }).start();
+
+
             } else {
                 response = new Response(Response.Status.BAD_REQUEST, "invalid request: req is null");
             }

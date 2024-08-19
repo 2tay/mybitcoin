@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.example.Networking.Client.Client;
+import com.example.Networking.Client.Request;
 import com.example.Networking.Server.Server;
 import com.example.Wallet.Wallet;
 
@@ -30,6 +31,13 @@ public class MainServer {
 
     public synchronized static Set<String> getNetworkNodes() {
         return networkNodes;
+    }
+
+    public static void sendReqToAllNetwork(Request req) {
+        for(String node : networkNodes) {
+            String[] nodeInfos = node.split(":");
+            client.sendSerializedMessage(req, nodeInfos[0], Integer.parseInt(nodeInfos[1]));
+        }
     }
 
 

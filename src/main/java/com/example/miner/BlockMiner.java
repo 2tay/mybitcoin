@@ -117,11 +117,6 @@ public class BlockMiner extends Thread implements Serializable {
             }
 
             if (!validTransactions.isEmpty()) {
-                for (Transaction tx : validTransactions) {
-                    TransactionPool.removeTransaction(tx);
-                    UTXOSet.removeConsumedUtxosTransaction(tx);
-                    UTXOSet.addUtxosTransaction(tx);
-                }
                 Blockchain.addToBlockchain(block);
                 Logger.log(minerName + " Successfully mined Block: " + block);
                 candidateBlock = null;  // Reset candidate block after successful mining

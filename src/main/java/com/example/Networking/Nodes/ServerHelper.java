@@ -12,7 +12,6 @@ import com.example.Networking.Client.Request;
 import com.example.Networking.Client.RequestHelper;
 import com.example.Networking.Server.Response;
 import com.example.Networking.Server.Server;
-import com.example.Pool.TransactionPool;
 import com.example.Transaction.Transaction;
 import com.example.Transaction.UTXO;
 import com.example.Wallet.Wallet;
@@ -33,10 +32,6 @@ public class ServerHelper {
 
         Block firstBlock = new Block(new ArrayList<>(Arrays.asList(tx0, tx1, tx2)), null, miner);
         Blockchain.addToBlockchain(firstBlock);
-
-        TransactionPool.removeTransaction(tx0);
-        TransactionPool.removeTransaction(tx1);
-        TransactionPool.removeTransaction(tx2);
 
         return firstBlock;
     }

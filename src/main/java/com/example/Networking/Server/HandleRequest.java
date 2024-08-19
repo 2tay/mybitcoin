@@ -8,7 +8,6 @@ import com.example.Blockchain.Blockchain;
 import com.example.Networking.Nodes.MainServer;
 import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
-import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
 
 public class HandleRequest {
@@ -28,10 +27,6 @@ public class HandleRequest {
                 Transaction tx = (Transaction) argument;
                 if(TransactionPool.addToPool(tx)) 
                 {
-                    // Update UTXO Pool
-                    UTXOSet.removeConsumedUtxosTransaction(tx);
-                    UTXOSet.addUtxosTransaction(tx);
-
                     return new Response(Response.Status.OK, "Added Transaction Successfully");
                 }
 
@@ -42,10 +37,18 @@ public class HandleRequest {
         }
         else if(method.equals("postBlock"))
         {
-            // TODO: check block if mined verification
-            Block minedBlock = (Block) argument;
-            Blockchain.addToBlockchain(minedBlock);
-            return new Response(Response.Status.OK, "Block Added successfully to Blockchain");
+            if(argument instanceof Block && argument != null)
+            {
+                Block minedBlock = (Block) argument;
+                if(Blockchain.verifyBlock(minedBlock)) {
+                    Blockchain.addToBlockchain(minedBlock);
+                    return new Response(Response.Status.OK, "Mined Block added Successfully");
+                }
+
+                return new Response(Response.Status.UNAUTHORIZED, "Mined BLock is not valid");
+            }
+
+            return new Response(Response.Status.BAD_REQUEST, "invalid Argument [Mined Block]");
         }
         // Get Blockchain from MainServer (Trust Node)
         else if(method.equals("getBlockchain")) 
