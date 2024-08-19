@@ -1,11 +1,15 @@
 package com.example.Networking.Nodes;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.example.Networking.Client.Client;
 import com.example.Networking.Client.Message;
 import com.example.Networking.Client.MessageHelper;
+import com.example.Networking.Server.Response;
 import com.example.Networking.Server.Server;
 
 public class Node {
@@ -19,7 +23,6 @@ public class Node {
     }
 
     public void startNodeServer() {
-        // start server in a new Thread
         new Thread(() -> server.startServer()).start();
     }
 
@@ -27,13 +30,38 @@ public class Node {
         server.stopServer(); 
     }
 
-    public static List<String> getAllNodes() {
-        return new ArrayList<>(peerNodes);
+    public void addMeToNetwork(String bootstrapNodeHost, int bootstrapNodePort) {
+        try {
+            String ipAdd = Inet4Address.getLocalHost().getHostAddress();
+            Message msg = MessageHelper.msgPostNode(ipAdd, server.getPort());
+            client.sendSerializedMessage(msg, bootstrapNodeHost, bootstrapNodePort);
+        } 
+        catch (UnknownHostException e) {
+            System.err.println("Failed to get own node IP ADDRESS");
+            e.printStackTrace();
+        } 
     }
 
-    public static void addNode(String nodeInfos) {
-        peerNodes.add(nodeInfos);
+    public List<String> getNetworkNodes(String bootstrapNodeHost, int bootstrapNodePort) {
+        Message msg = MessageHelper.msgGetAllNodes();
+        Response response = client.sendSerializedMessage(msg, bootstrapNodeHost, bootstrapNodePort);
+
+        if (response != null && response.getStatus() == Response.Status.OK && response.getContent() instanceof List<?>) {
+            System.out.println("Response getAllNodes is not empty and response Status == OK");
+            List<?> content = (List<?>) response.getContent();
+
+            if (!content.isEmpty() && content.get(0) instanceof String) {
+                return (List<String>) content;
+            } else {
+                System.err.println("Unexpected content type: " + content);
+            }
+        } else {
+            System.err.println("Failed to retrieve network nodes or invalid content type.");
+        }
+        return Collections.emptyList(); // Return an empty list if something goes wrong
     }
+
+
 
     // -------------------->    TESTING FUNCTIONS    <-----------------------------------------
     // Start Node on port 2000
@@ -51,6 +79,6 @@ public class Node {
 
     public static void main(String[] args) {
         //testStartNodeServer();
-        testSendObject(); 
+        //testSendObject(); 
     }
 }

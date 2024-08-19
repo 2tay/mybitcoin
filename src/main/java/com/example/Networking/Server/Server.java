@@ -43,6 +43,10 @@ public class Server {
         }
     }
 
+    public int getPort() {
+        return port;
+    }
+
     // TESTING FUNCTIONS
     public static void testStartServer() {
         Server server = new Server(2000);

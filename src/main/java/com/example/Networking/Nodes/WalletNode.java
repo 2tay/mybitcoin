@@ -15,6 +15,11 @@ public class WalletNode extends Node {
     public WalletNode(int walletServerPort) {
         super(walletServerPort);
         wallet = new Wallet();
+
+        // Post Own Node in the Network (bootstrapNode)
+        addMeToNetwork("localhost", 2000);
+        // Get All Network Nodes
+        peerNodes = getNetworkNodes("localhost", 2000);
     }
 
     public Transaction processTransaction(PublicKey recipientPublicKey, int amount) {
@@ -37,6 +42,11 @@ public class WalletNode extends Node {
             System.out.println(tx + " Broadcast Succefully to " + peerHost + ":" + peerPort);
         }
         System.out.println("transaction is NULL");
+    }
+
+    public static void main(String[] args) {
+        WalletNode anode = new WalletNode(2005);
+        
     }
 
 }

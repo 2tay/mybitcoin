@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
 import com.example.Networking.Client.Message;
+import com.example.Networking.Nodes.BootstrapNode;
 import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
 import com.example.Transaction.Transaction;
@@ -86,8 +87,9 @@ public class HandleRequestHelper {
         return new Response(Response.Status.BAD_REQUEST);
     }
 
+    // Get All Nodes from bootstrap Node
     public Response handleGetAllNodes() {
-        List<String> peerNodes = Node.getAllNodes();
+        List<String> peerNodes = BootstrapNode.getAllNodes();
         if(!peerNodes.isEmpty()) {
             return new Response(Response.Status.OK, peerNodes);
         }
@@ -99,7 +101,7 @@ public class HandleRequestHelper {
         if(requestMessage.getArgument() instanceof String) {
             String nodeInfos = (String) requestMessage.getArgument();
 
-            Node.addNode(nodeInfos);
+            BootstrapNode.addNode(nodeInfos);
 
             return new Response(Response.Status.OK, nodeInfos);
         }

@@ -39,7 +39,7 @@ public class MessageHelper {
         return message;
     }
 
-    public static Message msgPostNode(String nodeHost, String nodePort) {
+    public static Message msgPostNode(String nodeHost, int nodePort) {
         String nodeInfos = nodeHost + ":" + nodePort;
         Message message = new Message("post", "node", nodeInfos);
         return message;
