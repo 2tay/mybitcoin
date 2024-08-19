@@ -3,6 +3,7 @@ package com.example.Wallet;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.List;
+import java.io.File;
 import java.security.KeyPair;
 
 import com.example.Pool.UTXOSet;
@@ -12,6 +13,7 @@ import com.example.Wallet.WalletPool.WalletTransactionPool;
 import com.example.Wallet.WalletPool.WalletUTXOPool;
 import com.example.utils.KeyUtils;
 import com.example.utils.TransactionUtils;
+import com.example.utils.WalletHelper;
 
 public class Wallet {
     private PrivateKey privateKey;
@@ -21,11 +23,34 @@ public class Wallet {
     private boolean walletRunning = false;
 
     public Wallet() {
-        KeyPair keyPair = KeyUtils.generateKeyPair();
-        this.privateKey = keyPair.getPrivate();
-        this.publicKey = keyPair.getPublic();
+        String privateKeyFile = "privateKey.key";
+        String publicKeyFile = "publicKey.key";
+
+        if (!WalletHelper.doesFilesExist(privateKeyFile, publicKeyFile)) {
+            // Generate new key pair and save to files
+            KeyPair keyPair = KeyUtils.generateKeyPair();
+            this.privateKey = keyPair.getPrivate();
+            this.publicKey = keyPair.getPublic();
+
+            // Save the keys to files
+            WalletHelper.saveKeyToFile(privateKeyFile, privateKey.getEncoded());
+            WalletHelper.saveKeyToFile(publicKeyFile, publicKey.getEncoded());
+        } else {
+            try {
+                // Load keys from files
+                this.privateKey = WalletHelper.readPrivateKeyFromFile(privateKeyFile);
+                this.publicKey = WalletHelper.readPublicKeyFromFile(publicKeyFile);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to initialize wallet from files.", e);
+            }
+        }
+        
+        // Initiliaze Wallet UTXO POol
         utxosPool = new WalletUTXOPool(publicKey);
     }
+
 
     private PrivateKey getPrivateKey() {
         return privateKey;
