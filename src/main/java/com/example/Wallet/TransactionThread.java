@@ -105,8 +105,8 @@ public class TransactionThread extends Thread {
 
     public static void test1() {
         // Create wallets
-        Wallet w1 = new Wallet();
-        Wallet w2 = new Wallet();
+        Wallet w1 = new Wallet("testKeys");
+        Wallet w2 = new Wallet("test2Keys");
 
         // give some initial utxo
         UTXO.genesisUtxo(w1, 50);

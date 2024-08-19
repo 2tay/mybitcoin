@@ -139,7 +139,7 @@ public class TransactionUtils {
 
     //tets1: test sign data and verfiy signature test function 
     public static void test1() {
-        Wallet myWallet = new Wallet();
+        Wallet myWallet = new Wallet("testKeys");
         String data = "hakim2tay";
         String signedData = myWallet.signData(data);
         System.err.println(signedData);
@@ -149,9 +149,9 @@ public class TransactionUtils {
 
     //test2: test createTransaction function
     public static void test2() {
-        Wallet h2tayWallet = new Wallet();
+        Wallet h2tayWallet = new Wallet("testKeys");
         UTXO.genesisUtxo(h2tayWallet, 200);
-        Wallet recipient = new Wallet();
+        Wallet recipient = new Wallet("test");
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
             System.out.println("Transaction created: " + t1);
@@ -169,9 +169,9 @@ public class TransactionUtils {
 
     //test3: test propagate to network
     public static void test3() {
-        Wallet h2tayWallet = new Wallet();
+        Wallet h2tayWallet = new Wallet("folder");
         UTXO.genesisUtxo(h2tayWallet, 200);
-        Wallet recipient = new Wallet();
+        Wallet recipient = new Wallet("folder");
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
             System.out.println("Transaction created: " + t1);
