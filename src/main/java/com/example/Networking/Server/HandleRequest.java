@@ -1,9 +1,12 @@
 package com.example.Networking.Server;
 
 import java.util.List;
+import java.util.Set;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
+import com.example.Networking.Nodes.MainServer;
+import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
@@ -39,11 +42,12 @@ public class HandleRequest {
         }
         else if(method.equals("postBlock"))
         {
-            // TODO: check block if mined 
+            // TODO: check block if mined verification
             Block minedBlock = (Block) argument;
             Blockchain.addToBlockchain(minedBlock);
             return new Response(Response.Status.OK, "Block Added successfully to Blockchain");
         }
+        // Get Blockchain from MainServer (Trust Node)
         else if(method.equals("getBlockchain")) 
         {
             List<Block> chain = Blockchain.getBlockchain();
@@ -60,15 +64,27 @@ public class HandleRequest {
             
             return new Response(Response.Status.BAD_REQUEST, "invalid Argument [Block]");
         }
+        // Node sent from MAinServer to Each Node to add new Node
         else if(method.equals("postNode")) {
-            // TODO : post nodeInfos received from bootstrap node in own peerNode
+            if(argument instanceof String && argument != null) {
+                String nodeInfos = (String) argument;
+                Node.addToNetworkNodes(nodeInfos);
+            }
         }
+        // Specefied for MAinServer
         else if(method.equals("postMyNode"))
         {
-            // TODO: todo later
+            if(argument instanceof String && argument != null) {
+                String nodeInfos = (String) argument;
+                MainServer.addToNetwork(nodeInfos);
+                return new Response(Response.Status.OK, "you are in network now under: " + nodeInfos);
+            }
+
+            return new Response(Response.Status.BAD_REQUEST, "invalid Argument [String 'myhost:myport']");
         }
         else if(method.equals("getNetwork")) {
-            //TODO : todolater
+            Set<String> networkNodes = MainServer.getNetworkNodes();
+            return new Response(Response.Status.OK, networkNodes);
         }
 
         return null;
