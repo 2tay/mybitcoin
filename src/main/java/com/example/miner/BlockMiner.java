@@ -8,6 +8,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
+import com.example.Networking.Client.Request;
+import com.example.Networking.Client.RequestHelper;
+import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
@@ -48,6 +51,9 @@ public class BlockMiner extends Thread implements Serializable {
                     boolean solved = solveMiningPuzzle();
                     if (solved) {
                         mineBlock(candidateBlock);
+                        // Broadcast Mined Block to all Network
+                        Request req = RequestHelper.postBlock(candidateBlock);
+                        Node.sendReqToAllNetwork(req);
                     }
                 }
 
