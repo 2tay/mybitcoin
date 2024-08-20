@@ -2,10 +2,13 @@ package com.example.utils;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Security;
 import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
@@ -31,12 +34,14 @@ public class TransactionUtils {
 
     public static boolean verifySignature(String data, String signedData, PublicKey publicKey) {
         try {
+            Security.addProvider(new BouncyCastleProvider());
             Signature signature = Signature.getInstance("SHA256withECDSA", "BC");
             signature.initVerify(publicKey);
             signature.update(data.getBytes());
             byte[] signedBytes = Base64.getDecoder().decode(signedData);
             return signature.verify(signedBytes);
         } catch (Exception e) {
+            System.err.println("Failed in verify signature");
             throw new RuntimeException(e);
         }
     }
@@ -130,9 +135,11 @@ public class TransactionUtils {
         return TransactionPool.addToPool(transaction);
     }
 
+    // --------------------->   TESTING FUNCTIONS   <----------------------------
+
     //tets1: test sign data and verfiy signature test function 
     public static void test1() {
-        Wallet myWallet = new Wallet();
+        Wallet myWallet = new Wallet("testKeys");
         String data = "hakim2tay";
         String signedData = myWallet.signData(data);
         System.err.println(signedData);
@@ -142,9 +149,9 @@ public class TransactionUtils {
 
     //test2: test createTransaction function
     public static void test2() {
-        Wallet h2tayWallet = new Wallet();
+        Wallet h2tayWallet = new Wallet("testKeys");
         UTXO.genesisUtxo(h2tayWallet, 200);
-        Wallet recipient = new Wallet();
+        Wallet recipient = new Wallet("test");
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
             System.out.println("Transaction created: " + t1);
@@ -162,9 +169,9 @@ public class TransactionUtils {
 
     //test3: test propagate to network
     public static void test3() {
-        Wallet h2tayWallet = new Wallet();
+        Wallet h2tayWallet = new Wallet("folder");
         UTXO.genesisUtxo(h2tayWallet, 200);
-        Wallet recipient = new Wallet();
+        Wallet recipient = new Wallet("folder");
         try {
             Transaction t1 = createTransaction(h2tayWallet, recipient.getPublicKey(), 100);
             System.out.println("Transaction created: " + t1);
@@ -196,6 +203,6 @@ public class TransactionUtils {
     }
     
     public static void main(String[] args) {
-        test3();
+        test1();
     }
 }

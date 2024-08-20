@@ -1,24 +1,45 @@
 package com.example.Blockchain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import com.example.Block.Block;
 import com.example.Pool.TransactionPool;
+import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
-import com.example.Transaction.UTXO;
-import com.example.Wallet.Wallet;
-import com.example.miner.BlockMiner;
+import com.example.utils.TransactionUtils;
 
 public class Blockchain {
     private static final List<Block> chain = new ArrayList<>();
 
-    static {
-        Block genisisBlock = genisisBlock();
-        chain.add(genisisBlock);
+    public static List<Block> getBlockchain() {
+        return new ArrayList<>(chain);
+    }
+
+    public static boolean verifyBlock(Block newBlock) {
+        for(Block block : chain) {
+            if(block.getBlockId().equals(newBlock.getBlockId())) {
+                return false;
+            }
+            if(block.getTransactions().equals(newBlock.getTransactions())) {
+                return false;
+            }
+        }
+
+        for(Transaction tx : newBlock.getTransactions()) {
+            if(!TransactionUtils.verifyTransaction(tx)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static synchronized void addToBlockchain(Block block) {
+        for(Transaction tx : block.getTransactions()) {
+            TransactionPool.removeTransaction(tx);
+            UTXOSet.removeConsumedUtxosTransaction(tx);
+            UTXOSet.addUtxosTransaction(tx);
+        }
         chain.add(block);
     }
 
@@ -31,15 +52,6 @@ public class Blockchain {
         return latestBlock != null ? latestBlock.getBlockId() : null;
     }
 
-    public static Block genisisBlock() {
-        Wallet satoshiWallet = new Wallet();
-        BlockMiner miner = new BlockMiner("Miner0");
-        UTXO.genesisUtxo(satoshiWallet, 10);
-        Transaction tx = satoshiWallet.processTransaction(satoshiWallet.getPublicKey(), 10);
-        Block firstBlock = new Block(new ArrayList<>(Arrays.asList(tx)), null, miner);
-        TransactionPool.removeTransaction(tx);
-        return firstBlock;
-    }
 
     public static List<Block> getNewBlocks(Block block) {
         int index = chain.indexOf(block);

@@ -4,10 +4,11 @@ import com.example.Transaction.Transaction;
 import com.example.miner.BlockMiner;
 import com.example.utils.KeyUtils;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-public class Block {
+public class Block implements Serializable {
     private final String blockId;
     private final String previousBlockId;
     private final long timestamp;

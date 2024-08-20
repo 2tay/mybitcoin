@@ -1,5 +1,6 @@
 package com.example.miner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,16 +8,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.example.Block.Block;
 import com.example.Blockchain.Blockchain;
+import com.example.Networking.Client.Request;
+import com.example.Networking.Client.RequestHelper;
+import com.example.Networking.Nodes.Node;
 import com.example.Pool.TransactionPool;
 import com.example.Pool.UTXOSet;
 import com.example.Transaction.Transaction;
-import com.example.Transaction.TransactionThread;
 import com.example.Transaction.UTXO;
+import com.example.Wallet.TransactionThread;
 import com.example.Wallet.Wallet;
 import com.example.utils.Logger;
 import com.example.utils.TransactionUtils;
 
-public class BlockMiner extends Thread {
+public class BlockMiner extends Thread implements Serializable {
     public final String minerName;
     private volatile Block candidateBlock;
     private final AtomicBoolean running;
@@ -47,6 +51,9 @@ public class BlockMiner extends Thread {
                     boolean solved = solveMiningPuzzle();
                     if (solved) {
                         mineBlock(candidateBlock);
+                        // Broadcast Mined Block to all Network
+                        Request req = RequestHelper.postBlock(candidateBlock);
+                        Node.sendReqToAllNetwork(req);
                     }
                 }
 
@@ -110,11 +117,6 @@ public class BlockMiner extends Thread {
             }
 
             if (!validTransactions.isEmpty()) {
-                for (Transaction tx : validTransactions) {
-                    TransactionPool.removeTransaction(tx);
-                    UTXOSet.removeConsumedUtxosTransaction(tx);
-                    UTXOSet.addUtxosTransaction(tx);
-                }
                 Blockchain.addToBlockchain(block);
                 Logger.log(minerName + " Successfully mined Block: " + block);
                 candidateBlock = null;  // Reset candidate block after successful mining
