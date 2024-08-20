@@ -2,6 +2,10 @@ package com.example.Wallet;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Security;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.io.File;
 import java.security.KeyPair;
 
@@ -20,6 +24,10 @@ public class Wallet {
     private WalletTransactionPool transactionPool = new WalletTransactionPool();
     private WalletUTXOPool utxosPool;
     private boolean walletRunning = false;
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     // Default constructor
     public Wallet() {
@@ -52,9 +60,10 @@ public class Wallet {
     public void initWallet(String privateKeyFile, String publicKeyFile) {
         if (!WalletHelper.doesFilesExist(privateKeyFile, publicKeyFile)) {
             generateAndSaveKeys(privateKeyFile, publicKeyFile);
-        } else {
-            loadKeysFromFile(privateKeyFile, publicKeyFile);
-        }
+        } 
+        // read from file to fix same keys read Type problem 
+        loadKeysFromFile(privateKeyFile, publicKeyFile);
+        
     }
 
     // Generate new key pair and save to files
